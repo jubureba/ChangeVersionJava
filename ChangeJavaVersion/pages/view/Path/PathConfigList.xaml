@@ -1,0 +1,107 @@
+﻿<Page x:Class="ChangeJavaVersion.pages.view.config.PathConfigList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ChangeJavaVersion.pages.view.config"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="750"
+      Title="ConfigPath" Loaded="Window_Loaded">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/pages/utils/RectangleStyle.xaml"/>
+                <ResourceDictionary Source="/pages/utils/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="/pages/utils/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/pages/utils/DataGridHeaderStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+
+    <Grid x:Name="content" Height="500" Width="550" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="0 0 0 0" >
+
+        <Rectangle Height="450" Width="550" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 20 0 0" Fill="White" RadiusX="10" RadiusY="10" Style="{StaticResource Estilo_Retangulo}" Grid.RowSpan="2"/>
+        <DataGrid Width="530" Height="300" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                  ItemsSource="{Binding}" x:Name="tablePath" IsReadOnly="True" GridLinesVisibility="None"
+                  AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" BorderBrush="{x:Null}" FontFamily="Bahnschrift Light" FontWeight="Bold" FontSize="14" Opacity="0.995" Margin="0 90 0 0" Grid.RowSpan="2">
+
+
+            <DataGrid.Columns >
+
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Text}" HeaderStyle="{StaticResource DataGridStyle1}"
+                                    Header="Nome" Width="150"/>
+                <DataGridTextColumn x:Name="Caminho" Binding="{Binding Value}" HeaderStyle="{StaticResource DataGridStyle1}"
+                                    Header="Caminho" Width="330"/>
+
+                <DataGridTemplateColumn Header="Ação" Width="48" HeaderStyle="{StaticResource DataGridStyle1}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnExcluir"  Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="1" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnExcluir_Click" Style="{StaticResource botaoListForm}" >
+                                <StackPanel Orientation="Horizontal" Margin="10" >
+                                    <fa:ImageAwesome Icon="Trash"  Width="20" Height="20" Margin="0,0,10,0" Foreground="#FF959595" />
+                                    
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+        <Grid  Margin="0 90 0 0" Width="530" Height="300" Background="white" Opacity=".8" x:Name="spinner" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <fa:ImageAwesome Icon="Refresh" Spin="True" Height="48" Width="48" Foreground="#FFCACACA" />
+        </Grid>
+
+
+        <!-- MENU SUPERIOR -->
+        <Border BorderThickness="0 0 0 1"  VerticalAlignment="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Width="550" Height="70" BorderBrush="LightGray" >
+            <Grid Margin="0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="550" Height="70" >
+                <fa:ImageAwesome Icon="List" Height="20" Width="20" Margin="20 0 0 0" Foreground="LightGray" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="JAVA PATH LIST" Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
+                <Button x:Name="btnNovo" Height="68" Width="100"  Margin="0,0,25,0" VerticalAlignment="Top" HorizontalAlignment="Right" Padding="1" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNovo_Click_1" Style="{StaticResource botaoListForm}" >
+                    <StackPanel Orientation="Horizontal" Width="80" >
+                        <fa:ImageAwesome Icon="Plus"  Width="20" Height="20" Margin="0,0,10,0" Foreground="#FF959595" />
+                        <TextBlock VerticalAlignment="Center" Width="58.99" Text="NOVO" Foreground="#FF959595" FontWeight="Bold" x:Name="tbNovo" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- MENU INFERIOR -->
+        <Grid Margin="0,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="550" Height="70" Grid.Row="1">
+            
+            <Button x:Name="btnNext" Height="30" Width="60"  Margin="0 0 85 0" VerticalAlignment="Center" HorizontalAlignment="Right" Cursor="Hand"  Background="{x:Null}" BorderBrush="{x:Null}"  Style="{StaticResource botaoPagination}" Click="btnNext_Click">
+                <fa:ImageAwesome Icon="ArrowRight"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Foreground="#FF959595" />
+            </Button>
+            <Button x:Name="btnPrevious" Height="30" Width="60"  Margin="0 0 145 0" VerticalAlignment="Center" HorizontalAlignment="Right" Cursor="Hand"  Background="{x:Null}" BorderBrush="{x:Null}"  Style="{StaticResource botaoPagination}" Click="btnPrevious_Click">
+                <fa:ImageAwesome Icon="ArrowLeft"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Foreground="#FF959595" />
+            </Button>
+           
+            <!--<Button x:Name="btnLast" Height="30" Width="60" Content=">>" Background="#FFF1F1F1" BorderBrush="{x:Null}" Margin="0 0 25 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Button x:Name="btnNext" Height="30" Width="60" Content=">" Background="#FFF1F1F1" BorderBrush="{x:Null}" Margin="0 0 85 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnNext_Click" />
+            <Button x:Name="btnPrevious" Height="30" Width="60" Content="&lt;" Background="#FFF1F1F1" BorderBrush="{x:Null}" Margin="0 0 145 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPrevious_Click"/>
+            <Button x:Name="btnFirst" Height="30" Width="60" Content="&lt;&lt;" Background="#FFF1F1F1" BorderBrush="{x:Null}" Margin="0 0 205 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" />
+-->
+            <Button x:Name="btnVoltar" Height="70" Width="100"  Margin="25,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="1" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnVoltar_Click" Style="{StaticResource botaoListForm}" >
+                <StackPanel Orientation="Horizontal" Width="80" >
+                    <fa:ImageAwesome Icon="ArrowCircleLeft"  Width="20" Height="20" Margin="0,0,10,0" Foreground="#FF959595" />
+                    <TextBlock VerticalAlignment="Center" Width="58.99" Text="VOLTAR" Foreground="#FF959595" FontWeight="Bold"  />
+                </StackPanel>
+            </Button>
+            <TextBlock x:Name="lbRegistros" Text="Registros: 0" Margin="0 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FF959595" FontWeight="Bold"/>
+        </Grid>
+
+
+    </Grid>
+</Page>

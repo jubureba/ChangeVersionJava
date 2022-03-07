@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ChangeJavaVersion</id>
+    <version>1.0.0</version>
+    <authors>ChangeJavaVersion</authors>
+    <description>Package Description</description>
+    <releaseNotes>correcoes de bugs</releaseNotes>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="Cake.Powershell" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="FontAwesome.WPF" version="4.7.0.9" exclude="Build,Analyzers" />
+        <dependency id="Hardcodet.NotifyIcon.Wpf" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="LiveCharts.Wpf" version="0.9.7" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Resources.ResourceManager" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net6.0-windows7.0/vibe.ico" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="C:\Users\ength\Desktop\ChangeJavaVersion\Debug\net6.0-windows\ChangeJavaVersion.runtimeconfig.json" target="lib\net6.0-windows7.0\ChangeJavaVersion.runtimeconfig.json" />
+    <file src="C:\Users\ength\Desktop\ChangeJavaVersion\Debug\net6.0-windows\ChangeJavaVersion.dll" target="lib\net6.0-windows7.0\ChangeJavaVersion.dll" />
+    <file src="C:\Users\ength\Documents\Projetos\VibeTecnologia2\C#\ChangeJavaVersion\ChangeJavaVersion\ChangeJavaVersion\vibe.ico" target="content\vibe.ico" />
+    <file src="C:\Users\ength\Documents\Projetos\VibeTecnologia2\C#\ChangeJavaVersion\ChangeJavaVersion\ChangeJavaVersion\vibe.ico" target="contentFiles\any\net6.0-windows7.0\vibe.ico" />
+  </files>
+</package>

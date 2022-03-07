@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\ength\\Documents\\Projetos\\VibeTecnologia2\\C#\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\ength\\Documents\\Projetos\\VibeTecnologia2\\C#\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\ength\\Documents\\Projetos\\VibeTecnologia2\\C#\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion.csproj",
+        "projectName": "ChangeJavaVersion",
+        "projectPath": "C:\\Users\\ength\\Documents\\Projetos\\VibeTecnologia2\\C#\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion.csproj",
+        "packagesPath": "C:\\Users\\ength\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ength\\Documents\\Projetos\\VibeTecnologia2\\C#\\ChangeJavaVersion\\ChangeJavaVersion\\ChangeJavaVersion\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\ength\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/enterprise/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Cake.Powershell": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
+            "FontAwesome.WPF": {
+              "target": "Package",
+              "version": "[4.7.0.9, )"
+            },
+            "Hardcodet.NotifyIcon.Wpf": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "System.Resources.ResourceManager": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

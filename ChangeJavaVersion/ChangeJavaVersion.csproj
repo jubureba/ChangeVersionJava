@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>javaIcon.ico</ApplicationIcon>
+    <StartupObject></StartupObject>
+    <BaseOutputPath>C:\Users\ength\Desktop\ChangeJavaVersion</BaseOutputPath>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <SignAssembly>False</SignAssembly>
+    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <PackageReleaseNotes>correcoes de bugs</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="pages\javaIcon.ico" />
+    <None Remove="pages\utils\Close.png" />
+    <None Remove="pages\utils\Close2.png" />
+    <None Remove="pages\vibe.ico" />
+    <None Remove="pages\vibe.png" />
+    <None Remove="pages\vibelogo2.jpg" />
+    <None Remove="pages\view\Donate\qrcodepix.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="javaIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cake.Powershell" Version="1.0.1" />
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="pages\javaIcon.ico" />
+    <Resource Include="pages\utils\Close.png" />
+    <Resource Include="pages\utils\Close2.png" />
+    <Resource Include="pages\vibe.ico" />
+    <Resource Include="pages\vibe.png" />
+    <Resource Include="pages\vibelogo2.jpg" />
+    <Resource Include="pages\view\Donate\qrcodepix.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\messages.Designer.cs">
+      <DependentUpon>messages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="pages\utils\ComboBoxStyle.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Excecoes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\messages.resx">
+      <LastGenOutput>messages.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

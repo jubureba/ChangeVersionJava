@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\ength\Documents\Projetos\VibeTecnologia2\C#\ChangeJavaVersion\ChangeJavaVersion\ChangeJavaVersion\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="pages\utils\Balloon.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\view\Config\Configuracoes.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\view\Donate\Donate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\view\Path\PathConfigList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="pages\Principal.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\Balloon.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\BreadcrumbStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\DataGridHeaderStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\ListViewStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\PlaceholderStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\PopupStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\RectangleStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\utils\SliderButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\view\Config\Configuracoes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\view\Donate\Donate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\view\Path\PathConfigList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\view\Path\PathConfigForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\view\Dashboard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
