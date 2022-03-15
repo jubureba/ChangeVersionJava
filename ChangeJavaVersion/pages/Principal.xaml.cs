@@ -14,6 +14,8 @@ using ChangeJavaVersion.Modelos.Interfaces;
 using ChangeJavaVersion.Properties;
 using System.IO;
 using ChangeJavaVersion.pages.view.Donate;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace ChangeJavaVersion {
 
@@ -23,21 +25,31 @@ namespace ChangeJavaVersion {
         FindPath fpath = new FindPathImpl();
         TextToObject txtObj = new TextToObjectImpl();
         SystemTrayTextToObject txtObjSTray = new SystemTrayTextToObjectImpl();
-
+        IAppConfig appConfig = new IAppConfigImpl();
+        
         public Principal() {
             InitializeComponent();
 
             HomePage();
-
             refreshMenuTray();
+      
+            if(ConfigurationManager.AppSettings.Get("System") == null 
+                || ConfigurationManager.AppSettings.Get("System").Equals("")) {
 
+                createConfigFileIfDontExists();
+            }
 
             //set title
             this.Title = messages.sistema + messages.build + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            checkExistsConfigFile();
+            // checkExistsConfigFile();
         }
 
+        public void createConfigFileIfDontExists() {
+            appConfig.AddOrUpdateAppSettings("System", "False");
+            appConfig.AddOrUpdateAppSettings("Language", "Portuguese");
+        }
 
+        //FIXME: Retirar, alterado o txt para o app.config
         public void checkExistsConfigFile () {
             List<SystemCloseConfig> valoresTxt = txtObjSTray.ReadFile(fpath.findJavaPath((fpath.findDocPath()), "SystemTray.txt"));
             if (valoresTxt.Count == 0) {
@@ -65,11 +77,12 @@ namespace ChangeJavaVersion {
         }
 
         private void Window_Closing(object sender, CancelEventArgs e) {
-            List<SystemCloseConfig> sbTraySystemTxtValue = txtObjSTray.ReadFile(fpath.findJavaPath((fpath.findDocPath()), "SystemTray.txt"));
-            if (sbTraySystemTxtValue[0].Value == true) {
+            //List<SystemCloseConfig> sbTraySystemTxtValue = txtObjSTray.ReadFile(fpath.findJavaPath((fpath.findDocPath()), "SystemTray.txt"));
+            bool systemTray = Boolean.Parse(ConfigurationManager.AppSettings.Get("System"));
+            if (systemTray == true) {
                 e.Cancel = true;
                 this.Visibility = Visibility.Hidden;
-            } else if (sbTraySystemTxtValue[0].Value == false) {
+            } else if (systemTray == false) {
                 e.Cancel = false;
                 Application.Current.Shutdown();
             }

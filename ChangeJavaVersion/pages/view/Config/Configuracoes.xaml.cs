@@ -1,8 +1,12 @@
 ﻿using ChangeJavaVersion.Modelos.Interfaces;
 using ChangeJavaVersion.pages.abstracts;
 using ChangeJavaVersion.pages.view.config;
+using ChangeJavaVersion.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,50 +23,90 @@ using System.Windows.Shapes;
 
 namespace ChangeJavaVersion.pages.view.Config {
     public partial class Configuracoes : Page {
-        
+
+        IAppConfig appConfig = new IAppConfigImpl();
+
         //Constructor
         public Configuracoes() {
             InitializeComponent();
             PreencherSliderButton();
+            PreencherComboBox();
         }
 
         FindPath fpath = new FindPathImpl();
         SystemTrayTextToObject txtObjSTray = new SystemTrayTextToObjectImpl();
 
-        private void PreencherSliderButton() {
-            List<SystemCloseConfig> sbTraySystemTxtValue = txtObjSTray.ReadFile(fpath.findJavaPath((fpath.findDocPath()), "SystemTray.txt"));
 
-            sbTraySystem.IsChecked = sbTraySystemTxtValue[0].Value;
+
+        /*
+         * ================================================================
+         * CONFIGURAÇOES ==================================================
+         * ================================================================
+         */
+
+        private void PreencherComboBox() {
+            List<string> idiomas = new List<string> { "Português", "English" };
+            cbIdioma.ItemsSource = idiomas;
+            cbIdioma.SelectedItem = ConfigurationManager.AppSettings.Get("Language");         
         }
 
-        private void sbTraySystem_Click(object sender, RoutedEventArgs e) {
+        private void PreencherSliderButton() {
+            bool systemTray = Boolean.Parse(ConfigurationManager.AppSettings.Get("System"));
+            bool startup = Boolean.Parse(ConfigurationManager.AppSettings.Get("Startup"));
 
-            if (sbTraySystem.IsChecked == true) {
-                List<SystemCloseConfig> valoresTxt = txtObjSTray.ReadFile(fpath.findJavaPath((fpath.findDocPath()), "SystemTray.txt"));
-                string text = valoresTxt[0].Name.ToString() + "=" + valoresTxt[0].Value.ToString();
-                string textFinal = text.Replace("False", "True");
-                string pathComplete = System.IO.Path.Combine(fpath.findDocPath() + @"\\SystemTray.txt");
+            sbTraySystem.IsChecked = systemTray;
+            sbStartWindows.IsChecked = startup;
+        }
 
-                lineChanger(textFinal, pathComplete, 2);
+        private void RegisterInStartup(bool isChecked) {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
+                    ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (isChecked) {
+                registryKey.SetValue(messages.sistema, Process.GetCurrentProcess().MainModule.FileName);
             } else {
-                List<SystemCloseConfig> valoresTxt = txtObjSTray.ReadFile(fpath.findJavaPath((fpath.findDocPath()), "SystemTray.txt"));
-                string text = valoresTxt[0].Name.ToString() + "=" + valoresTxt[0].Value.ToString();
-                string textFinal = text.Replace("True", "False");
-                string pathComplete = System.IO.Path.Combine(fpath.findDocPath() + @"\\SystemTray.txt");
-
-                lineChanger(textFinal, pathComplete, 2);
+                registryKey.DeleteValue(messages.sistema);
             }
         }
 
-        static void lineChanger(string newText, string fileName, int line_to_edit) {
-            string[] arrLine = File.ReadAllLines(fileName);
-            arrLine[line_to_edit - 1] = newText;
-            File.WriteAllLines(fileName, arrLine);
+        /*
+         * ================================================================
+         * AÇOES ==========================================================
+         * ================================================================
+         */
+
+        private void sbTraySystem_Click(object sender, RoutedEventArgs e) {
+            if (sbTraySystem.IsChecked == true) {
+                appConfig.AddOrUpdateAppSettings("System","True");
+            } else {             
+                appConfig.AddOrUpdateAppSettings("System", "False");
+            }
         }
 
         private void btnVoltar_Click(object sender, RoutedEventArgs e) {
             while (NavigationService.RemoveBackEntry() != null) ;
             NavigationService.Content = new Dashboard();
         }
+
+                private void sbStartWindows_Click(object sender, RoutedEventArgs e) {
+            if (sbStartWindows.IsChecked == true) {
+                RegisterInStartup(true);
+                appConfig.AddOrUpdateAppSettings("Startup", "True");
+            } else {
+                RegisterInStartup(false);
+                appConfig.AddOrUpdateAppSettings("Startup", "False");
+            }
+        }
+
+        private void cbIdioma_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+
+        }
+
+        /*
+        static void lineChanger(string newText, string fileName, int line_to_edit) {
+            string[] arrLine = File.ReadAllLines(fileName);
+            arrLine[line_to_edit - 1] = newText;
+            File.WriteAllLines(fileName, arrLine);
+        }*/
+
     }
 }

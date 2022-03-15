@@ -17,8 +17,7 @@ namespace ChangeJavaVersion.Dominio.Modelos.Enums {
             [field: Description("SystemTray.txt")]
             CONFIGFILE
         }
-
-        
+  
     }
 
     public static class MyEnumExtensions {

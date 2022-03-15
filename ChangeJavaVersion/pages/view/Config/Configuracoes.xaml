@@ -30,7 +30,7 @@
 
 
 
-        <Rectangle Height="280" Width="550" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 20 0 0" Fill="White" RadiusX="10" RadiusY="10" Style="{StaticResource Estilo_Retangulo}"/>
+        <Rectangle Width="550" HorizontalAlignment="Center" Margin="0,20,0,200" Fill="White" RadiusX="10" RadiusY="10" Style="{StaticResource Estilo_Retangulo}"/>
         <Grid Height="280" Width="550" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 20 0 0">
             <Border BorderThickness="0 0 0 1"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="550" Height="70" BorderBrush="LightGray">
                 <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Width="550" Height="70" >
@@ -38,28 +38,34 @@
                     <TextBlock Text="CONFIGURAÇÕES" Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
                 </Grid>
             </Border>
+            <Grid Margin="0" Width="550" Height="140">
+                <view:SliderButton OnLabel="" OffLabel="" x:Name="sbTraySystem" Width="70" ButtonWidth="20" Style="{StaticResource styleSliderButtonSideLabel}"  Margin="20,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="sbTraySystem_Click" />
+                <TextBlock Text="MANTER EXECUTANDO EM SEGUNDO PLANO" Margin="110,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
 
+                <view:SliderButton OnLabel="" OffLabel="" x:Name="sbStartWindows" Width="70" ButtonWidth="20" Style="{StaticResource styleSliderButtonSideLabel}"  Margin="20,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="22" RenderTransformOrigin="0.5,0.5"  Click="sbStartWindows_Click"/>
+                <TextBlock Text="INICIAR JUNTO COM O WINDOWS" Margin="110 53 0 0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
 
-            <view:SliderButton OnLabel="" OffLabel="" x:Name="sbTraySystem" Width="70" ButtonWidth="20" Style="{StaticResource styleSliderButtonSideLabel}"  Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  Click="sbTraySystem_Click" />
-            <TextBlock Text="MANTER EXECUTANDO EM SEGUNDO PLANO" Margin="110,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
+                <ComboBox Height="30" HorizontalAlignment="Left" Margin="30,80,0,0" x:Name="cbIdioma" FlowDirection="LeftToRight"
+                         IsTextSearchEnabled="True" PreviewTextInput="cbIdioma_PreviewTextInput"
+                         VerticalAlignment="Top"  Foreground="#FF28FFDA" FontSize="17" FontWeight="Normal"/>
+                <TextBlock Text="IDIOMA" Margin="170 87 0 0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
 
-            <view:SliderButton OnLabel="" OffLabel="" x:Name="sbTraySystem2" Width="70" ButtonWidth="20" Style="{StaticResource styleSliderButtonSideLabel}"  Margin="20,140,190,65" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="INICIAR JUNTO COM O WINDOWS" Margin="110 73 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
+            </Grid>
 
             <!-- MENU INFERIOR -->
             <Grid Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="550" Height="70" Grid.Row="1">
-               
-
                 <Button x:Name="btnVoltar" Height="70" Width="100"  Margin="25,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="1" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnVoltar_Click" Style="{StaticResource botaoListForm}" >
                     <StackPanel Orientation="Horizontal" Width="80" >
                         <fa:ImageAwesome Icon="ArrowCircleLeft"  Width="20" Height="20" Margin="0,0,10,0" Foreground="#FF959595" />
                         <TextBlock VerticalAlignment="Center" Width="58.99" Text="VOLTAR" Foreground="#FF959595" FontWeight="Bold"  />
                     </StackPanel>
                 </Button>
-               
+
             </Grid>
+
+
         </Grid>
-        
-        
+
+
     </Grid>
 </Page>
