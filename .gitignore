@@ -4,3 +4,5 @@
 
 # Para ignorar todos os arquivos e sub-pastas da pasta metadata/
 obj/
+
+obj/build

@@ -46,7 +46,9 @@ namespace ChangeJavaVersion {
 
         public void createConfigFileIfDontExists() {
             appConfig.AddOrUpdateAppSettings("System", "False");
+            appConfig.AddOrUpdateAppSettings("Startup", "False");
             appConfig.AddOrUpdateAppSettings("Language", "Portuguese");
+
         }
 
         //FIXME: Retirar, alterado o txt para o app.config
@@ -110,6 +112,8 @@ namespace ChangeJavaVersion {
                 }
             } 
         }
+
+
 
         private void btnPathJDK_Click(object sender, RoutedEventArgs e) {
             load_frame.Content = new PathConfigList();
