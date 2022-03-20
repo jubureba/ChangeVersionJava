@@ -6,8 +6,12 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/" x:Class="ChangeJavaVersion.Principal"
         xmlns:commands="clr-namespace:ChangeJavaVersion.pages.notify.commands"
         xmlns:tb="http://www.hardcodet.net/taskbar" 
+        xmlns:visualFx="http://mixmodes.com/visualFx"
         mc:Ignorable="d"
-        Title="" Height="620" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+       
+        
+        Title="" Height="655" Width="810" WindowStartupLocation="CenterScreen" Closing="Window_Closing" ResizeMode="NoResize"  >
+   
 
     <Window.Resources>
         <ResourceDictionary>
@@ -19,16 +23,30 @@
                 <ResourceDictionary Source="/pages/utils/PopupStyle.xaml"/>
                 <ResourceDictionary Source="/pages/utils/ListViewStyle.xaml"/>
                 <ResourceDictionary Source="/pages/utils/SliderButton.xaml"/>
+                <ResourceDictionary Source="/pages/utils/WindowBorder.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid  Background="#FFEEEEEE" >
+    
+    <Grid  Background="#FFEEEEEE" Height="620" Width="800" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+      
         <tb:TaskbarIcon x:Name="MyNotifyIcon" x:FieldModifier="public"
                         IconSource="/pages/javaIcon.ico"
-                        ToolTipText="ChangeJavaVersion - Build 1.0.0.0">
+                        ToolTipText="ChangeJavaVersion - Build 1.0.0.0"
+                        TrayLeftMouseDown="ShowOrHidenWindow"
+                        >
             <tb:TaskbarIcon.ContextMenu>
+
+
                 <ContextMenu  >
+                    <MenuItem Header="ChangeJava" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <Image Source="/pages/javaIcon.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+
                     <MenuItem Header="Versões" ItemsSource="{Binding Path=MyCollection}" x:Name="menuTray" >
 
                         <MenuItem.ItemContainerStyle>
@@ -37,6 +55,12 @@
                                 <EventSetter Event="Click" Handler="TraySystemMenuClick"/>
                             </Style>
                         </MenuItem.ItemContainerStyle>
+
+                        <!--
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="AddressBook"  Width="12" Height="12" Margin="0" Foreground="#c3c3c3"/>
+                        </MenuItem.Icon>
+-->
                     </MenuItem>
 
                     <Separator/>
@@ -44,23 +68,19 @@
                               Command="{commands:ShowSampleWindowCommand}"
                               CommandParameter="{Binding}">
                         <MenuItem.Icon>
-                            <Image Width="16"
-                                   Height="16"/>
+                            <fa:ImageAwesome Icon="WindowMaximize"  Width="12" Height="12" Margin="0" Foreground="#c3c3c3"/>
                         </MenuItem.Icon>
                     </MenuItem>
-
-
 
                     <MenuItem Header="Minimizar Janela"
                               Command="{commands:HideSampleWindowCommand}"
                               CommandParameter="{Binding}">
                         <MenuItem.Icon>
-                            <Image Width="16"
-                                   Height="16" />
+                            <fa:ImageAwesome Icon="WindowMinimize"  Width="12" Height="12" Margin="0" Foreground="#c3c3c3"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="Fechar"
+                    <MenuItem Header="Quit ChangeJava"
                               Command="{commands:CloseWindowCommand}"
                               CommandParameter="{Binding}">
                         <MenuItem.Icon>
@@ -75,15 +95,30 @@
         </tb:TaskbarIcon>
 
 
-        <Grid Margin="0,0,0,534" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="800
-              " Background="White">
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="50" Width="5" Margin="260 0 0 0" Background="#FF0016A6"/>
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="50" Width="3" Margin="255 0 0 0" Background="#FF5A9DD0"/>
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="50" Width="3" Margin="250 0 0 0" Background="#FF28FFDA"/>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="86" Width="800
+              " Background="White" MouseDown="Window_MouseDown">
 
-            <TextBlock Text="Change JAVA Version" TextWrapping="Wrap" Margin="10,0,0,0" Foreground="#FF0016A6" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Champagne &amp; Limousines" FontWeight="Bold" Width="229"/>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="5" Margin="167,0,0,0" Background="#FF0016A6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="3" Margin="163,0,0,0" Background="#FF5A9DD0"/>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="3" Margin="159,0,0,0" Background="#FF28FFDA"/>
 
-            <!-- <Grid Width="30" Height="50" Background="#FFE5625A" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,0">
+            <TextBlock Text="Change" TextWrapping="Wrap" Margin="8,17,0,0" Foreground="Black" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" Width="149"/>
+            <TextBlock TextWrapping="Wrap" Margin="94,17,0,0" Foreground="#FF444343" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" Width="58"><Run Language="pt-br" Text="Java"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="8,44,0,0" Foreground="#FF0016A6" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" Width="129"><Run Language="pt-br" Text="Version"/></TextBlock>
+
+            <!--
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Margin="0 2 0 0" Cursor="Hand">
+                <fa:ImageAwesome Icon="WindowClose"  Width="40" Height="30" Margin="0,0,0,0" Foreground="#FFAF2020"/>
+                
+            </Grid>
+            <Grid Width="30" Height="50" Background="#FFE5625A" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,0">
 
                 <fa:ImageAwesome x:Name="btnCloseWindow" Icon="Close" Height="20" Margin="4,25,4,5" Foreground="LightGray" Cursor="Hand" MouseLeftButtonDown="btnCloseWindow_MouseLeftButtonDown"/>
             </Grid> -->
@@ -144,6 +179,7 @@
 
         <Grid  Height="500" Width="590" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="1" Margin="0 0 20 20" >
             <Frame x:Name="load_frame" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"  />
+
         </Grid>
 
 

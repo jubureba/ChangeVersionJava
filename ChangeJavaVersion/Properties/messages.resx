@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="build" xml:space="preserve">
     <value> - Build versão: </value>
   </data>
   <data name="erro" xml:space="preserve">
-    <value>Erro!</value>
+    <value>Erro! </value>
   </data>
   <data name="SessaoInvalidaMsg" xml:space="preserve">
     <value>Sua sessão não esta mais ativa.</value>
@@ -130,13 +130,23 @@
     <value>Change Java Version</value>
   </data>
   <data name="sucesso" xml:space="preserve">
-    <value>Sucesso!</value>
+    <value>Sucesso! </value>
   </data>
   <data name="versao.alterada" xml:space="preserve">
-    <value>Versão do JDK alterada para: {0}</value>
+    <value>Versão do JDK: {0}</value>
+  </data>
+  <data name="versao.alterada.completa" xml:space="preserve">
+    <value>Versão anterior: {0}  
+Versão atual: {1}
+Versão alterada com sucesso!</value>
   </data>
   <data name="versao.inalterada" xml:space="preserve">
     <value>Houve um erro ao alterar a versão!</value>
+  </data>
+  <data name="versao.inalterada.completa" xml:space="preserve">
+    <value>Uma mesma versão da JDK já está no seu JAVA_HOME.
+Reabra seu cmd e digite java -version
+Versão atual: {0}</value>
   </data>
   <data name="version" xml:space="preserve">
     <value>0.0.0.0</value>

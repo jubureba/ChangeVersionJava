@@ -94,30 +94,17 @@
         <Border HorizontalAlignment="Stretch"
                 Margin="5,5,5,5"
                 BorderThickness="1,1,1,1"
-                BorderBrush="#FF0016A6">
+                BorderBrush="#FF7B7B7B" Background="#FF2F2F2F">
             <Border.Effect>
                 <DropShadowEffect Color="#FF0016A6" BlurRadius="5" Opacity="0.2" ShadowDepth="0" Direction="0" />
             </Border.Effect>
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1"
-                                     StartPoint="0.5,0">
-                    <GradientStop Color="White"
-                                  Offset="1" />
-                    <GradientStop Color="#c3c3c3"
-                                  Offset="1" />
-                </LinearGradientBrush>
-            </Border.Background>
         </Border>
-        <TextBlock Margin="17,44,18,0"
+        <TextBlock Margin="17,47,18,0"
                    VerticalAlignment="Top"
-                   Foreground="#FF0E0E0E"
-                   TextWrapping="Wrap" Height="66"                 
-                   Text="{Binding Path=BalloonMsg, ElementName=me, Mode=Default}" FontSize="13">
-
-
-
-        </TextBlock>
-        <Path Fill="#FF4794EA"
+                   Foreground="#FFEDEDED"
+                   TextWrapping="Wrap" Height="63"                 
+                   Text="{Binding Path=BalloonMsg, ElementName=me, Mode=Default}" FontSize="13" FontFamily="Tahoma"/>
+        <Path
               Stretch="Fill"
               Margin="10,38,34,0"
               VerticalAlignment="Top"
@@ -127,10 +114,10 @@
             <Path.Stroke>
                 <LinearGradientBrush EndPoint="0.973,0.5"
                                      StartPoint="0.005,0.5">
-                    <GradientStop Color="white"
-                                  Offset="1" />
-                    <GradientStop Color="#FF4794EA"
+                    <GradientStop Color="#FFD2D2D2"
                                   Offset="0" />
+                    <GradientStop Color="#FF2F2F2F"
+                                  Offset="0.944" />
                 </LinearGradientBrush>
             </Path.Stroke>
         </Path>

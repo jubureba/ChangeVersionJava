@@ -70,7 +70,7 @@ namespace ChangeJavaVersion.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro!.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro! .
         /// </summary>
         public static string erro {
             get {
@@ -97,7 +97,7 @@ namespace ChangeJavaVersion.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Sucesso!.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Sucesso! .
         /// </summary>
         public static string sucesso {
             get {
@@ -106,11 +106,22 @@ namespace ChangeJavaVersion.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Versão do JDK alterada para: {0}.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Versão do JDK: {0}.
         /// </summary>
         public static string versao_alterada {
             get {
                 return ResourceManager.GetString("versao.alterada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Versão anterior: {0}  
+        ///Versão atual: {1}
+        ///Versão alterada com sucesso!.
+        /// </summary>
+        public static string versao_alterada_completa {
+            get {
+                return ResourceManager.GetString("versao.alterada.completa", resourceCulture);
             }
         }
         
@@ -120,6 +131,17 @@ namespace ChangeJavaVersion.Properties {
         public static string versao_inalterada {
             get {
                 return ResourceManager.GetString("versao.inalterada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Uma mesma versão da JDK já está no seu JAVA_HOME.
+        ///Reabra seu cmd e digite java -version
+        ///Versão atual: {0}.
+        /// </summary>
+        public static string versao_inalterada_completa {
+            get {
+                return ResourceManager.GetString("versao.inalterada.completa", resourceCulture);
             }
         }
         

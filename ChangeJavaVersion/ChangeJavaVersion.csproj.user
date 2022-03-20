@@ -59,6 +59,9 @@
     <Page Update="pages\utils\SliderButton.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="pages\utils\WindowBorder.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="pages\view\Config\Configuracoes.xaml">
       <SubType>Designer</SubType>
     </Page>

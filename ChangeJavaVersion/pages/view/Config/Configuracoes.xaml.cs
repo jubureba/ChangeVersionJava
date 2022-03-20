@@ -25,6 +25,8 @@ namespace ChangeJavaVersion.pages.view.Config {
     public partial class Configuracoes : Page {
 
         IAppConfig appConfig = new IAppConfigImpl();
+        FindPath fpath = new FindPathImpl();
+        SystemTrayTextToObject txtObjSTray = new SystemTrayTextToObjectImpl();
 
         //Constructor
         public Configuracoes() {
@@ -32,11 +34,6 @@ namespace ChangeJavaVersion.pages.view.Config {
             PreencherSliderButton();
             PreencherComboBox();
         }
-
-        FindPath fpath = new FindPathImpl();
-        SystemTrayTextToObject txtObjSTray = new SystemTrayTextToObjectImpl();
-
-
 
         /*
          * ================================================================
@@ -51,7 +48,7 @@ namespace ChangeJavaVersion.pages.view.Config {
         }
 
         private void PreencherSliderButton() {
-            bool systemTray = Boolean.Parse(ConfigurationManager.AppSettings.Get("System"));
+            bool systemTray = Boolean.Parse(ConfigurationManager.AppSettings.Get("TraySystem"));
             bool startup = Boolean.Parse(ConfigurationManager.AppSettings.Get("Startup"));
 
             sbTraySystem.IsChecked = systemTray;
@@ -76,9 +73,9 @@ namespace ChangeJavaVersion.pages.view.Config {
 
         private void sbTraySystem_Click(object sender, RoutedEventArgs e) {
             if (sbTraySystem.IsChecked == true) {
-                appConfig.AddOrUpdateAppSettings("System","True");
+                appConfig.AddOrUpdateAppSettings("TraySystem", "True");
             } else {             
-                appConfig.AddOrUpdateAppSettings("System", "False");
+                appConfig.AddOrUpdateAppSettings("TraySystem", "False");
             }
         }
 
