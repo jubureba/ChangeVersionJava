@@ -17,13 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="pages\javaIcon.ico" />
-    <None Remove="pages\utils\Close.png" />
-    <None Remove="pages\utils\Close2.png" />
-    <None Remove="pages\vibe.ico" />
-    <None Remove="pages\vibe.png" />
-    <None Remove="pages\vibelogo2.jpg" />
-    <None Remove="pages\view\Donate\qrcodepix.png" />
+    <None Remove="Pages\javaIcon.ico" />
+    <None Remove="Pages\utils\Close.png" />
+    <None Remove="Pages\utils\Close2.png" />
+    <None Remove="Pages\vibe.ico" />
+    <None Remove="Pages\vibe.png" />
+    <None Remove="Pages\vibelogo2.jpg" />
+    <None Remove="Pages\view\Donate\qrcodepix.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,13 +39,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="pages\javaIcon.ico" />
-    <Resource Include="pages\utils\Close.png" />
-    <Resource Include="pages\utils\Close2.png" />
-    <Resource Include="pages\vibe.ico" />
-    <Resource Include="pages\vibe.png" />
-    <Resource Include="pages\vibelogo2.jpg" />
-    <Resource Include="pages\view\Donate\qrcodepix.png" />
+    <Resource Include="Pages\javaIcon.ico" />
+    <Resource Include="Pages\utils\Close.png" />
+    <Resource Include="Pages\utils\Close2.png" />
+    <Resource Include="Pages\vibe.ico" />
+    <Resource Include="Pages\vibe.png" />
+    <Resource Include="Pages\vibelogo2.jpg" />
+    <Resource Include="Pages\view\Donate\qrcodepix.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,7 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="pages\utils\ComboBoxStyle.xaml">
+    <Page Update="Pages\utils\ComboBoxStyle.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

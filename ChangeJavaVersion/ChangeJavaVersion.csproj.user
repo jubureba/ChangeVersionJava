@@ -9,72 +9,78 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="pages\utils\Balloon.xaml.cs">
+    <Compile Update="Pages\utils\Balloon.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="pages\view\Config\Configuracoes.xaml.cs">
+    <Compile Update="Pages\view\Config\Configuracoes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="pages\view\Donate\Donate.xaml.cs">
+    <Compile Update="Pages\view\Donate\Donate.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="pages\view\Path\PathConfigList.xaml.cs">
+    <Compile Update="Pages\view\Path\PathConfigList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Window1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="pages\Principal.xaml">
+    <Page Update="Pages\Principal.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\Balloon.xaml">
+    <Page Update="Pages\utils\Balloon.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\BreadcrumbStyle.xaml">
+    <Page Update="Pages\utils\BreadcrumbStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\ComboBoxStyle.xaml">
+    <Page Update="Pages\utils\ComboBoxStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\ButtonStyle.xaml">
+    <Page Update="Pages\utils\ButtonStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\DataGridHeaderStyle.xaml">
+    <Page Update="Pages\utils\DataGridHeaderStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\DataGridStyle.xaml">
+    <Page Update="Pages\utils\DataGridStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\ListViewStyle.xaml">
+    <Page Update="Pages\utils\ListViewStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\PlaceholderStyle.xaml">
+    <Page Update="Pages\utils\PlaceholderStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\PopupStyle.xaml">
+    <Page Update="Pages\utils\PopupStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\RectangleStyle.xaml">
+    <Page Update="Pages\utils\RectangleStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\SliderButton.xaml">
+    <Page Update="Pages\utils\SliderButton.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\utils\WindowBorder.xaml">
+    <Page Update="Pages\utils\WindowBorder.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\view\Config\Configuracoes.xaml">
+    <Page Update="Pages\view\Config\Configuracoes.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\view\Donate\Donate.xaml">
+    <Page Update="Pages\view\Donate\Donate.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\view\Path\PathConfigList.xaml">
+    <Page Update="Pages\view\Path\PathConfigList.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\view\Path\PathConfigForm.xaml">
+    <Page Update="Pages\view\Path\PathConfigForm.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\view\Dashboard.xaml">
+    <Page Update="Pages\view\Dashboard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Window1.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
