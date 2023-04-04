@@ -7,7 +7,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
         <Setter Property="FontStyle" Value="Oblique"/>
         <Setter Property="Padding" Value="2 10 0 10"/>
         <Setter Property="BorderThickness" Value="0 0 0 3"/>
-        <Setter Property="BorderBrush" Value="#FF0016A6"/>
+        <Setter Property="BorderBrush" Value="#2E3956"/>
 
     </Style>
 </ResourceDictionary>

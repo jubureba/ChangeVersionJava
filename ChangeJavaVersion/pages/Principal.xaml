@@ -8,9 +8,9 @@
         xmlns:commands="clr-namespace:ChangeJavaVersion.pages.notify.commands"
         xmlns:tb="http://www.hardcodet.net/taskbar" 
         mc:Ignorable="d"
-         Height="645" Width="800" WindowStartupLocation="CenterScreen"
+         Height="621" Width="800" WindowStartupLocation="CenterScreen"
         HorizontalAlignment="Center" VerticalAlignment="Center"
-        Closing="Window_Closing" ResizeMode="NoResize" Margin="0" Padding="0" Title="CHANGE JAVA VERSION V 1.0">
+        Closing="Window_Closing" ResizeMode="NoResize" Margin="0" Padding="0"  >
 
 
     <Window.Resources>
@@ -29,11 +29,11 @@
     </Window.Resources>
 
 
-    <Grid Background="#FFEEEEEE" Height="605" Width="800" Margin="0" >
+    <Grid Background="#FFEEEEEE" Height="605" Width="800" VerticalAlignment="Bottom" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="86*"/>
-            <RowDefinition Height="491*"/>
-            <RowDefinition Height="43*"/>
+            <RowDefinition Height="84*"/>
+            <RowDefinition Height="490*"/>
+            <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="43*"/>
@@ -43,42 +43,40 @@
 
         <!-- MENU SUPERIOR -->
         <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Height="86" Width="800" Background="White" MouseDown="Window_MouseDown" Grid.ColumnSpan="2" Grid.Column="0">
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="5" Margin="167,0,0,0" Background="#FF0016A6"/>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="5" Margin="167,0,0,0" Background="#2E3956"/>
             <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="3" Margin="163,0,0,0" Background="#FF5A9DD0"/>
             <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="3" Margin="159,0,0,0" Background="#FF28FFDA"/>
             <TextBlock Text="Change" TextWrapping="Wrap" Margin="8,17,0,0" Foreground="Black" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" Width="149"/>
             <TextBlock TextWrapping="Wrap" Margin="94,17,0,0" Foreground="#FF444343" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" Width="58"><Run Language="pt-br" Text="Java"/></TextBlock>
-            <TextBlock TextWrapping="Wrap" Margin="8,44,0,0" Foreground="#FF0016A6" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" Width="129"><Run Language="pt-br" Text="Version"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="8,44,0,0" Foreground="#2E3956" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" Width="129"><Run Language="pt-br" Text="Version"/></TextBlock>
         </Grid>
 
         <!-- MENU LATERAL -->
         <Grid Width="172" Height="521"  HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="2" Grid.Row="1">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF0016A6" Offset="0.193"/>
-                    <GradientStop Color="#FF2637A4" Offset="1"/>
+                    <GradientStop Color="#2E3956" Offset="0.193"/>
+                    <GradientStop Color="#2E3956" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Grid x:Name="fundoFoto" HorizontalAlignment="Center" VerticalAlignment="Top" Width="172" Height="54" >
-                <TextBlock x:Name="lblonline" Text="Build Release - 1.0.0.1" Foreground="#FF28FFDA" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Margin="0,0,0,0" FontSize="15" />
-            </Grid>
-            <Button x:Name="btnPathJDK" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 50 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#FF0016A6"  Cursor="Hand" Background="#FF0016A6"  Style="{StaticResource botaoMenuLateral}" Click="btnPathJDK_Click">
+
+            <Button x:Name="btnPathJDK" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 50 0 0" VerticalAlignment="Top" HorizontalAlignment="Center"  Cursor="Hand" Background="#2E3956"  Style="{StaticResource botaoMenuLateral}" Click="btnPathJDK_Click">
                 <StackPanel Orientation="Horizontal" Width="150" Margin="10">
                     <fa:ImageAwesome Icon="ListUl"  Width="20" Height="20" Margin="0,0,10,0" Foreground="LightGray"/>
                     <TextBlock Text="CAMINHO JDK" VerticalAlignment="Center" Width="85" />
                 </StackPanel>
             </Button>
-            <Button x:Name="btnConfig" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 95 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#FF0016A6"  Cursor="Hand" Background="#FF0016A6"  Style="{StaticResource botaoMenuLateral}" Click="btnConfig_Click">
+            <Button x:Name="btnConfig" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 95 0 0" VerticalAlignment="Top" HorizontalAlignment="Center"   Cursor="Hand" Background="#2E3956"  Style="{StaticResource botaoMenuLateral}" Click="btnConfig_Click">
                 <StackPanel Orientation="Horizontal" Width="150" Margin="10">
                     <fa:ImageAwesome Icon="Gears"  Width="20" Height="20" Margin="0,0,10,0" Foreground="LightGray"/>
                     <TextBlock Text="CONFIGURAÇÕES" VerticalAlignment="Center" Width="105" />
                 </StackPanel>
             </Button>
-            <Button x:Name="btnDonate" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 0 0 20" VerticalAlignment="Bottom" HorizontalAlignment="Center" BorderBrush="#FF2032A4"  Cursor="Hand"  Style="{StaticResource botaoMenuLateral}" Click="btnDonate_Click">
+            <Button x:Name="btnDonate" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 0 0 20" VerticalAlignment="Bottom" HorizontalAlignment="Center"  Cursor="Hand"  Style="{StaticResource botaoMenuLateral}" Click="btnDonate_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF2032A4" Offset="0.193"/>
-                        <GradientStop Color="#FF2637A4" Offset="1"/>
+                        <GradientStop Color="#2E3956" Offset="0.193"/>
+                        <GradientStop Color="#2E3956" Offset="1"/>
                     </LinearGradientBrush>
                 </Button.Background>
                 <StackPanel Orientation="Horizontal" Width="150" Margin="10">
@@ -96,10 +94,10 @@
 
 
         <!-- RODAPE -->
-        <Border BorderThickness="0 1 0 0"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="610" Height="30" BorderBrush="LightGray" Grid.Column="1" Grid.Row="2">
-            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="610" Height="30" >
-                <fa:ImageAwesome Icon="Code" Height="20" Width="20" Margin="0 0 180 0" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Desenvolvido por Anderson Lima - " Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightGray" FontWeight="Bold"/>
+        <Border BorderThickness="0 1 0 0"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="628" Height="30" BorderBrush="LightGray" Grid.Column="1" Grid.Row="2">
+            <Grid VerticalAlignment="Center" Height="30" Margin="-20,0,0,0" >
+                <!--<fa:ImageAwesome Icon="Code" Height="20" Width="20" Margin="100 0 0 0" Foreground="LightGray" HorizontalAlignment="left" VerticalAlignment="Center"/> -->
+                <TextBlock Name="tbRodape" Text="Desenvolvido por Anderson Lima - build 1.0" Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightGray" FontWeight="Bold"/>
             </Grid>
         </Border>
 

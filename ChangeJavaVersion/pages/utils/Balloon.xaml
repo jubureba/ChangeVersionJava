@@ -8,8 +8,21 @@
              xmlns:tb="http://www.hardcodet.net/taskbar"
              x:Name="me"
              Height="120"
-             Width="200">
+             Width="310">
+
+    
     <UserControl.Resources>
+        <Style  TargetType="{x:Type Rectangle}"  x:Key="Estilo_Retangulo" >
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="30"
+                                  ShadowDepth="1"
+                                  Color="#FFD4D4D4" 
+                                  Direction="0"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Storyboard x:Key="FadeIn">
             <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                            Storyboard.TargetName="grid"
@@ -91,14 +104,13 @@
         </EventTrigger>
     </UserControl.Triggers>
     <Grid x:Name="grid" MouseEnter="grid_MouseEnter">
-        <Border HorizontalAlignment="Stretch"
-                Margin="5,5,5,5"
-                BorderThickness="1,1,1,1"
-                BorderBrush="#FF7B7B7B" Background="#FF2F2F2F">
-            <Border.Effect>
+        
+        <Rectangle Height="115" Width="310" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Fill="White" RadiusX="10" RadiusY="10" Style="{StaticResource Estilo_Retangulo}">
+            
+            <Rectangle.Effect>
                 <DropShadowEffect Color="#FF0016A6" BlurRadius="5" Opacity="0.2" ShadowDepth="0" Direction="0" />
-            </Border.Effect>
-        </Border>
+            </Rectangle.Effect>
+        </Rectangle>
         <TextBlock Margin="17,47,18,0"
                    VerticalAlignment="Top"
                    Foreground="#FFEDEDED"
@@ -123,10 +135,11 @@
         </Path>
         <TextBlock Margin="17,10,26,0"
                    VerticalAlignment="Top"
-                   Height="23"
+                   Height="26"
                    Text="{Binding Path=BalloonText, ElementName=me, Mode=Default}"
                    TextWrapping="Wrap"
-                   Foreground="#FF4794EA"
+                   Foreground="#2E3956"
+                   FontSize="20"
                    FontWeight="Bold" />
         <Image HorizontalAlignment="Right"
                Margin="0,10,10,0"

@@ -39,7 +39,7 @@
                 <Grid Margin="0,70,0,0" >
                     <ComboBox Height="30" HorizontalAlignment="Left" Margin="20,0,0,0" x:Name="cbVersion" DisplayMemberPath="Text" FlowDirection="LeftToRight"
                          IsTextSearchEnabled="True" PreviewTextInput="comboBox1_PreviewTextInput"
-                         VerticalAlignment="Center" Width="216" Foreground="#FF28FFDA" FontSize="17" FontWeight="Normal"/>
+                         VerticalAlignment="Center" Width="216" Foreground="#586178" FontSize="17" FontWeight="Normal"/>
 
                     <Button x:Name="btnChange" Height="40" Width="100"  Margin="0,0,12,0" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="1" Cursor="Hand"  BorderBrush="{x:Null}" Style="{StaticResource botaoListForm}" Click="btnChange_Click"  >
                         <StackPanel Orientation="Horizontal" Width="50" >
