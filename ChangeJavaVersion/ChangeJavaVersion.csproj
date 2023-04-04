@@ -11,8 +11,8 @@
     <BaseOutputPath>C:\Users\ength\Desktop\ChangeJavaVersion</BaseOutputPath>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <SignAssembly>False</SignAssembly>
-    <FileVersion>1.0.0.1</FileVersion>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
     <PackageReleaseNotes>correcoes de bugs</PackageReleaseNotes>
   </PropertyGroup>
 
