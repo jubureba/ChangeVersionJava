@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeJavaVersion", "ChangeJavaVersion\ChangeJavaVersion.csproj", "{517B26B2-3582-4A49-BECF-0E0A63AA0FB0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clickonce", "clickonce", "{A14A99FE-61F9-49B0-AA77-1F628E4476D4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
