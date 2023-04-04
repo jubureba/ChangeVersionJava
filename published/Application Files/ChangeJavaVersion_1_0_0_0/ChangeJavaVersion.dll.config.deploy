@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<appSettings>
+		<add key="TraySystem" value="" />
+		<add key="Startup" value=""/>
+		<add key="Language" value="Português" />
+		<add key="build" value="1.0" />
+		<add key="dev" value="Anderson Lima" />
+		<add key="rodape" value="Desenvolvido por" />
+		<add key="dataBuild" value="04/04/2023"/>
+	</appSettings>
+</configuration>

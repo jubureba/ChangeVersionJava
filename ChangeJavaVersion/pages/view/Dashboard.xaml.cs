@@ -2,7 +2,9 @@
 using ChangeJavaVersion.pages.view.config;
 using ChangeJavaVersion.Properties;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -80,7 +82,30 @@ namespace ChangeJavaVersion.pages {
         }
 
         private void setVersionInEnvironmentVariable(string variableName, string path, EnvironmentVariableTarget target) {
-            System.Environment.SetEnvironmentVariable(variableName, path, target);
+            //using (Process myProcess = new Process())
+            //{
+              
+                //System.Environment.SetEnvironmentVariable(variableName, path, target);
+             //}
+
+            if (!IsAdministrator())
+            {
+                // Restart program and run as admin
+                var exeName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                ProcessStartInfo startInfo = new ProcessStartInfo(exeName);
+                startInfo.Verb = "runas";
+                startInfo.Arguments = $"\"{variableName}\" \"{path}\" \"{target}\"";
+                System.Diagnostics.Process.Start(startInfo);
+                return;
+            }
+
+        }
+
+        public static bool IsAdministrator()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
         private void btnConfig_Click(object sender, RoutedEventArgs e) {
