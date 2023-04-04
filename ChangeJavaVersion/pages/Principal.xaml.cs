@@ -11,9 +11,13 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Intrinsics.X86;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Application;
 
 namespace ChangeJavaVersion {
 
@@ -44,6 +48,57 @@ namespace ChangeJavaVersion {
             this.Title = messages.sistema + " - Versão: " + build + " - Build: " + dataBuild;
 
         }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!IsRunAsAdmin())
+            {
+                if (RestartAsAdmin())
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("A aplicação precisa ser executada em modo de administrador.");
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
+        private bool IsRunAsAdmin()
+        {
+            var identity = WindowsIdentity.GetCurrent();
+            var principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        private bool RestartAsAdmin()
+        {
+            if (Environment.GetCommandLineArgs().Length > 0)
+            {
+                try
+                {
+                    var startInfo = new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        WorkingDirectory = Environment.CurrentDirectory,
+                        FileName = Environment.GetCommandLineArgs()[0],
+                        Verb = "runas"
+                    };
+
+                    Process.Start(startInfo);
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
 
         /*****************
          * COMPORTAMENTO *

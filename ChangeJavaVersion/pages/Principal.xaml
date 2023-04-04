@@ -10,7 +10,7 @@
         mc:Ignorable="d"
          Height="621" Width="800" WindowStartupLocation="CenterScreen"
         HorizontalAlignment="Center" VerticalAlignment="Center"
-        Closing="Window_Closing" ResizeMode="NoResize" Margin="0" Padding="0">
+        Closing="Window_Closing" ResizeMode="NoResize" Margin="0" Padding="0" Loaded="MainWindow_Loaded">
 
 
     <Window.Resources>
