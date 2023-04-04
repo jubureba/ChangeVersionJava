@@ -8,6 +8,7 @@ using ChangeJavaVersion.Properties;
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,7 +32,15 @@ namespace ChangeJavaVersion {
             checkExistsFileConfig();
 
             //setTitle
-            this.Title = messages.sistema + messages.build + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            var appSettings = ConfigurationManager.AppSettings;
+            string build = appSettings["build"] ?? "Not Found";
+            string dataBuild = appSettings["dataBuild"] ?? "Not Found";
+            string rodape = appSettings["rodape"] ?? "Not Found";
+            string dev = appSettings["dev"] ?? "Not Found";
+            string stringRodape = rodape + " " + dev + " - Versão: " + build + " - Build: " + dataBuild;
+            tbRodape.Text = stringRodape;
+
+            this.Title = messages.sistema + " - Versão: " + build + " - Build: " + dataBuild;
 
         }
 
@@ -106,6 +115,7 @@ namespace ChangeJavaVersion {
             if (load_frame.Content == null) {
                 load_frame.Content = new Dashboard();
             }
+            
         }
 
         private void checkExistsFileConfig() {
