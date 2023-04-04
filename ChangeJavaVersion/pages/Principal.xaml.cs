@@ -8,6 +8,7 @@ using ChangeJavaVersion.Properties;
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows;

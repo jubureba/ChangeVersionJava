@@ -2,8 +2,11 @@
 using ChangeJavaVersion.pages.view.config;
 using ChangeJavaVersion.Properties;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Security.Permissions;
 using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
@@ -66,6 +69,22 @@ namespace ChangeJavaVersion.pages {
         }
 
         public bool changeVersion(string versionPath) {
+
+            ProcessStartInfo processInfo = new ProcessStartInfo();
+            processInfo.Verb = "runas";
+            processInfo.FileName = Assembly.GetExecutingAssembly().CodeBase;
+            try
+            {
+                Process.Start(processInfo);
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Não foi possível iniciar a aplicação como administrador.");
+                Console.WriteLine(ex);
+            }
+
+
             if (checkVersion("JAVA_HOME", EnvironmentVariableTarget.Machine).Equals(versionPath)) {
                 MessageBox.Show(String.Format(messages.versao_inalterada_completa, versionPath), messages.erro, MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -77,35 +96,15 @@ namespace ChangeJavaVersion.pages {
             cleanVersion(); 
         }
 
-        private string checkVersion(string variableSystem, EnvironmentVariableTarget target) {
-            return System.Environment.GetEnvironmentVariable(variableSystem, target);
-        }
-
-        private void setVersionInEnvironmentVariable(string variableName, string path, EnvironmentVariableTarget target) {
-            //using (Process myProcess = new Process())
-            //{
-              
-                //System.Environment.SetEnvironmentVariable(variableName, path, target);
-             //}
-
-            if (!IsAdministrator())
-            {
-                // Restart program and run as admin
-                var exeName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-                ProcessStartInfo startInfo = new ProcessStartInfo(exeName);
-                startInfo.Verb = "runas";
-                startInfo.Arguments = $"\"{variableName}\" \"{path}\" \"{target}\"";
-                System.Diagnostics.Process.Start(startInfo);
-                return;
-            }
-
-        }
-
-        public static bool IsAdministrator()
+        public void setVersionInEnvironmentVariable(string variableName, string path, EnvironmentVariableTarget target)
         {
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            System.Environment.SetEnvironmentVariable(variableName, path, target);
+
+        }
+
+        public string checkVersion(string variableSystem, EnvironmentVariableTarget target)
+        {
+            return System.Environment.GetEnvironmentVariable(variableSystem, target);
         }
 
         private void btnConfig_Click(object sender, RoutedEventArgs e) {

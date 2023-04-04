@@ -17,13 +17,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="clickonce\**" />
     <Compile Remove="Excecoes\**" />
+    <EmbeddedResource Remove="clickonce\**" />
     <EmbeddedResource Remove="Excecoes\**" />
+    <None Remove="clickonce\**" />
     <None Remove="Excecoes\**" />
+    <Page Remove="clickonce\**" />
     <Page Remove="Excecoes\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="app.manifest" />
     <None Remove="Pages\javaIcon.ico" />
     <None Remove="Pages\utils\Close.png" />
     <None Remove="Pages\utils\Close2.png" />
@@ -33,15 +38,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="app.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="javaIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cake.Powershell" Version="1.0.1" />
-    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Cake.Powershell" Version="1.0.1">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -73,10 +89,6 @@
       <LastGenOutput>messages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="clickonce\" />
   </ItemGroup>
 
 </Project>
