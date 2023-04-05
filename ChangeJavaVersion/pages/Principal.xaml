@@ -104,20 +104,19 @@
         <!-- MENUTRAY-->
         <tb:TaskbarIcon x:Name="MyNotifyIcon" x:FieldModifier="public"
                         IconSource="/pages/javaIcon.ico"
-                        ToolTipText="ChangeJavaVersion - Build 1.0.0.0"
                         TrayLeftMouseDown="ShowOrHidenWindow" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu  >
+                <ContextMenu>
                     <MenuItem Header="ChangeJava" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="/pages/javaIcon.ico"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="Versões" ItemsSource="{Binding Path=MyCollection}" x:Name="menuTray" >
+                    <MenuItem Header="Versões" ItemsSource="{Binding Path=JavaVersion}" x:Name="menuTray" >
                         <MenuItem.ItemContainerStyle>
                             <Style TargetType="{x:Type MenuItem}">
-                                <Setter Property="Header" Value="{Binding Path=Text}"/>
+                                <Setter Property="Header" Value="{Binding Path=Version}"/>
                                 <EventSetter Event="Click" Handler="TraySystemMenuClick"/>
                             </Style>
                         </MenuItem.ItemContainerStyle>

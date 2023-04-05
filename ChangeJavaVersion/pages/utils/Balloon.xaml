@@ -10,7 +10,7 @@
              Height="120"
              Width="310">
 
-    
+
     <UserControl.Resources>
         <Style  TargetType="{x:Type Rectangle}"  x:Key="Estilo_Retangulo" >
             <Setter Property="Effect">
@@ -104,18 +104,18 @@
         </EventTrigger>
     </UserControl.Triggers>
     <Grid x:Name="grid" MouseEnter="grid_MouseEnter">
-        
+
         <Rectangle Height="115" Width="310" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Fill="White" RadiusX="10" RadiusY="10" Style="{StaticResource Estilo_Retangulo}">
-            
+
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FF0016A6" BlurRadius="5" Opacity="0.2" ShadowDepth="0" Direction="0" />
             </Rectangle.Effect>
         </Rectangle>
         <TextBlock Margin="17,47,18,0"
                    VerticalAlignment="Top"
-                   Foreground="#FFEDEDED"
-                   TextWrapping="Wrap" Height="63"                 
-                   Text="{Binding Path=BalloonMsg, ElementName=me, Mode=Default}" FontSize="13" FontFamily="Tahoma"/>
+                   Foreground="#2E3956"
+                   TextWrapping="Wrap" Height="63"
+                   Text="{Binding Path=BalloonMsg, ElementName=me, Mode=Default}" FontSize="14" FontFamily="Google"/>
         <Path
               Stretch="Fill"
               Margin="10,38,34,0"
@@ -133,7 +133,7 @@
                 </LinearGradientBrush>
             </Path.Stroke>
         </Path>
-        <TextBlock Margin="17,10,26,0"
+        <TextBlock Margin="17,9,26,0"
                    VerticalAlignment="Top"
                    Height="26"
                    Text="{Binding Path=BalloonText, ElementName=me, Mode=Default}"
@@ -144,8 +144,8 @@
         <Image HorizontalAlignment="Right"
                Margin="0,10,10,0"
                VerticalAlignment="Top"
-               Width="20"
-               Height="20"
+               Width="25"
+               Height="25"
                Source="/pages/utils/Close.png"
                Stretch="Fill"
                Opacity="0.4"

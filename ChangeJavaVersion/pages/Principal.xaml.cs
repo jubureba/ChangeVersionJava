@@ -6,17 +6,15 @@ using ChangeJavaVersion.pages.view.Config;
 using ChangeJavaVersion.pages.view.Donate;
 using ChangeJavaVersion.Properties;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.Intrinsics.X86;
 using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 
 namespace ChangeJavaVersion {
@@ -34,71 +32,65 @@ namespace ChangeJavaVersion {
 
             loadHomePage();
             refreshMenuTray();
-            checkExistsFileConfig();
 
-            //setTitle
-            var appSettings = ConfigurationManager.AppSettings;
-            string build = appSettings["build"] ?? "Not Found";
-            string dataBuild = appSettings["dataBuild"] ?? "Not Found";
-            string rodape = appSettings["rodape"] ?? "Not Found";
-            string dev = appSettings["dev"] ?? "Not Found";
-            string stringRodape = rodape + " " + dev + " - Versão: " + build + " - Build: " + dataBuild;
-            tbRodape.Text = stringRodape;
+            Version version = Assembly.GetEntryAssembly()?.GetName()?.Version;
+            if (version != null) {
+                string versionString = $"{version.Major}.{version.Minor}.{version.Build}";
+                //setTitle
+                var appSettings = ConfigurationManager.AppSettings;
+                string build = appSettings["build"] ?? "Not Found";
+                string dataBuild = appSettings["dataBuild"] ?? "Not Found";
+                string rodape = appSettings["rodape"] ?? "Not Found";
+                string dev = appSettings["dev"] ?? "Not Found";
+                string stringRodape = rodape + " " + dev + " - Versão: " + versionString + " - Build: " + dataBuild;
+                tbRodape.Text = stringRodape;
 
-            this.Title = messages.sistema + " - Versão: " + build + " - Build: " + dataBuild;
+                this.Title = messages.sistema + " - Versão: " + versionString + " - Build: " + dataBuild;
+            }
 
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (!IsRunAsAdmin())
-            {
-                if (RestartAsAdmin())
-                {
-
-                }
-                else
-                {
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
+            if (!IsRunAsAdmin()) {
+                if (RestartAsAdmin()) {
+                    Application.Current.Shutdown();
+                } else {
                     MessageBox.Show("A aplicação precisa ser executada em modo de administrador.");
                     Application.Current.Shutdown();
                 }
             }
         }
 
-        private bool IsRunAsAdmin()
-        {
+        private bool IsRunAsAdmin() {
             var identity = WindowsIdentity.GetCurrent();
             var principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
-        private bool RestartAsAdmin()
-        {
-            if (Environment.GetCommandLineArgs().Length > 0)
-            {
-                try
-                {
-                    var startInfo = new ProcessStartInfo
-                    {
+        private bool RestartAsAdmin() {
+            if (Environment.GetCommandLineArgs().Length > 0) {
+                try {
+                    var fileName = Environment.GetCommandLineArgs()[0];
+
+                    if (fileName.EndsWith(".dll")) {
+                        fileName = fileName.Replace(".dll", ".exe");
+                    }
+                    var startInfo = new ProcessStartInfo {
                         UseShellExecute = true,
                         WorkingDirectory = Environment.CurrentDirectory,
-                        FileName = Environment.GetCommandLineArgs()[0],
+                        FileName = fileName,
                         Verb = "runas"
                     };
 
                     Process.Start(startInfo);
 
                     return true;
-                }
-                catch
-                {
+                } catch {
                     return false;
                 }
             }
-
             return false;
         }
-
 
         /*****************
          * COMPORTAMENTO *
@@ -123,15 +115,18 @@ namespace ChangeJavaVersion {
 
         private void TraySystemMenuClick(object sender, RoutedEventArgs e) {
             MenuItem menuItem = sender as MenuItem;
-            PathJava pathJava = menuItem.DataContext as PathJava;
+            JavaVersion pathJava = menuItem.DataContext as JavaVersion;
             Dashboard dashboard = new Dashboard();
 
-            string newVersion = pathJava.Value;
+
+
+
+            string newVersion = pathJava.Version;
             if (newVersion != null) {
                 Boolean result = dashboard.changeVersion(newVersion);
                 if (result) {
                     ShowBalloon(messages.sucesso,
-                        String.Format(messages.versao_alterada, "\n" + pathJava.Text));
+                        String.Format(messages.versao_alterada, "\n" + pathJava.Version));
                 } else {
                     ShowBalloon(messages.erro,
                          String.Format(messages.versao_inalterada));
@@ -146,21 +141,19 @@ namespace ChangeJavaVersion {
         }
 
         public void refreshMenuTray() {
-            menuTray.ItemsSource = txtObj.ReadFile(fpath.findJavaPath((fpath.findDocPath()), "JavaPath.txt"));
-        }
-
-        private bool getSystemTray() {
-            return Boolean.Parse(ConfigurationManager.AppSettings.Get("TraySystem"));
+            var javaVersion = new List<JavaVersion>();
+            var appSettings = ConfigurationManager.AppSettings;
+            foreach (var key in appSettings.AllKeys) {
+                if (key.StartsWith("Java_")) {
+                    javaVersion.Add(new JavaVersion { Version = key, PathJava = appSettings[key] });
+                }
+            }
+            menuTray.ItemsSource = javaVersion;
         }
 
         private void Window_Closing(object sender, CancelEventArgs e) {
-            if (getSystemTray() == true) {
-                e.Cancel = true;
-                this.Visibility = Visibility.Hidden;
-            } else if (getSystemTray() == false) {
-                e.Cancel = false;
-                Application.Current.Shutdown();
-            }
+            e.Cancel = false;
+            Application.Current.Shutdown();
         }
 
         /*****************
@@ -171,19 +164,7 @@ namespace ChangeJavaVersion {
             if (load_frame.Content == null) {
                 load_frame.Content = new Dashboard();
             }
-            
-        }
 
-        private void checkExistsFileConfig() {
-            if (ConfigurationManager.AppSettings.Get("TraySystem") == null || ConfigurationManager.AppSettings.Get("TraySystem").Equals("")) {
-                createConfigFileIfDontExists();
-            }
-        }
-
-        public void createConfigFileIfDontExists() {
-            appConfig.AddOrUpdateAppSettings("TraySystem", "False");
-            appConfig.AddOrUpdateAppSettings("Startup", "False");
-            appConfig.AddOrUpdateAppSettings("Language", "Portuguese");
         }
 
         private void ShowBalloon(string title, string text) {
@@ -193,3 +174,4 @@ namespace ChangeJavaVersion {
 
     }
 }
+

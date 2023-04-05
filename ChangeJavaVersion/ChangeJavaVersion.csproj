@@ -61,6 +61,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="System.Deployment">
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\System.Deployment.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Pages\javaIcon.ico" />
     <Resource Include="Pages\utils\Close.png" />
     <Resource Include="Pages\utils\Close2.png" />
