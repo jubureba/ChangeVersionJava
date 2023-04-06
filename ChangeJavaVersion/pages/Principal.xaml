@@ -10,7 +10,7 @@
         mc:Ignorable="d"
          Height="621" Width="800" WindowStartupLocation="CenterScreen"
         HorizontalAlignment="Center" VerticalAlignment="Center"
-        Closing="Window_Closing" ResizeMode="NoResize" Margin="0" Padding="0" Loaded="MainWindow_Loaded">
+        Closing="Window_Closing" ResizeMode="CanMinimize" Margin="0" Padding="0" Loaded="MainWindow_Loaded">
 
 
     <Window.Resources>
@@ -29,10 +29,11 @@
     </Window.Resources>
 
 
-    <Grid Background="#FFEEEEEE" Height="605" Width="800" VerticalAlignment="Bottom" >
+    <Grid Background="#FFEEEEEE" Width="800" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="84*"/>
-            <RowDefinition Height="490*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="500*"/>
             <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -42,7 +43,7 @@
 
 
         <!-- MENU SUPERIOR -->
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Height="86" Width="800" Background="White" MouseDown="Window_MouseDown" Grid.ColumnSpan="2" Grid.Column="0">
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Height="86" Width="800" Background="White" MouseDown="Window_MouseDown" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="5" Margin="167,0,0,0" Background="#2E3956"/>
             <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="3" Margin="163,0,0,0" Background="#FF5A9DD0"/>
             <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Height="86" Width="3" Margin="159,0,0,0" Background="#FF28FFDA"/>
@@ -52,7 +53,7 @@
         </Grid>
 
         <!-- MENU LATERAL -->
-        <Grid Width="172" Height="521"  HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="2" Grid.Row="1">
+        <Grid Width="172" Height="530"  HorizontalAlignment="Center" VerticalAlignment="Top" Grid.RowSpan="2" Grid.Row="2" Margin="0,1,0,0">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#2E3956" Offset="0.193"/>
@@ -60,18 +61,19 @@
                 </LinearGradientBrush>
             </Grid.Background>
 
-            <Button x:Name="btnPathJDK" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 50 0 0" VerticalAlignment="Top" HorizontalAlignment="Center"  Cursor="Hand" Background="#2E3956"  Style="{StaticResource botaoMenuLateral}" Click="btnPathJDK_Click">
+            <Button x:Name="btnPathJDK" Width="172" Foreground="#FFD1D1D1" HorizontalAlignment="Center"  Cursor="Hand" Background="#2E3956"  Style="{StaticResource botaoMenuLateral}" Click="btnPathJDK_Click" Margin="0,-1,0,484">
                 <StackPanel Orientation="Horizontal" Width="150" Margin="10">
                     <fa:ImageAwesome Icon="ListUl"  Width="20" Height="20" Margin="0,0,10,0" Foreground="LightGray"/>
                     <TextBlock Text="CAMINHO JDK" VerticalAlignment="Center" Width="85" />
                 </StackPanel>
             </Button>
-            <Button x:Name="btnConfig" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 95 0 0" VerticalAlignment="Top" HorizontalAlignment="Center"   Cursor="Hand" Background="#2E3956"  Style="{StaticResource botaoMenuLateral}" Click="btnConfig_Click">
+            <Button x:Name="btnConfig" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0,46,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"   Cursor="Hand" Background="#2E3956"  Style="{StaticResource botaoMenuLateral}" Click="btnConfig_Click">
                 <StackPanel Orientation="Horizontal" Width="150" Margin="10">
                     <fa:ImageAwesome Icon="Gears"  Width="20" Height="20" Margin="0,0,10,0" Foreground="LightGray"/>
                     <TextBlock Text="CONFIGURAÇÕES" VerticalAlignment="Center" Width="105" />
                 </StackPanel>
             </Button>
+            <!--
             <Button x:Name="btnDonate" Height="45" Width="172" Foreground="#FFD1D1D1" Margin="0 0 0 20" VerticalAlignment="Bottom" HorizontalAlignment="Center"  Cursor="Hand"  Style="{StaticResource botaoMenuLateral}" Click="btnDonate_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -81,30 +83,31 @@
                 </Button.Background>
                 <StackPanel Orientation="Horizontal" Width="150" Margin="10">
                     <fa:ImageAwesome Icon="Money"  Width="20" Height="20" Margin="0,0,10,0" Foreground="LightGray"/>
-                    <TextBlock Text="DONATE" VerticalAlignment="Center" Width="105" />
+                    <TextBlock Text="BUY ME A COFFE" VerticalAlignment="Center" Width="105" />
                 </StackPanel>
             </Button>
+            -->
         </Grid>
 
         <!-- CONTENT CENTRAL -->
-        <Grid  Height="500" Width="590" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Margin="0,1,0,0" Grid.RowSpan="2" Grid.Row="1" >
+        <Grid  Height="500" Width="590" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" >
             <Frame x:Name="load_frame" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"  />
 
         </Grid>
 
 
         <!-- RODAPE -->
-        <Border BorderThickness="0 1 0 0"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="628" Height="30" BorderBrush="LightGray" Grid.Column="1" Grid.Row="2">
+        <Border BorderThickness="0 1 0 0"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="628" Height="30" BorderBrush="LightGray" Grid.Column="1" Grid.Row="3">
             <Grid VerticalAlignment="Center" Height="30" Margin="-20,0,0,0" >
                 <!--<fa:ImageAwesome Icon="Code" Height="20" Width="20" Margin="100 0 0 0" Foreground="LightGray" HorizontalAlignment="left" VerticalAlignment="Center"/> -->
                 <TextBlock Name="tbRodape" Text="Desenvolvido por Anderson Lima - build 1.0" Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightGray" FontWeight="Bold"/>
             </Grid>
         </Border>
 
-        <!-- MENUTRAY-->
+        <!-- MENUTRAY
         <tb:TaskbarIcon x:Name="MyNotifyIcon" x:FieldModifier="public"
                         IconSource="/pages/javaIcon.ico"
-                        TrayLeftMouseDown="ShowOrHidenWindow" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                        TrayLeftMouseDown="ShowOrHidenWindow" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="0,-16,0,0" d:IsHidden="True">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="ChangeJava" IsEnabled="False">
@@ -148,6 +151,6 @@
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-
+-->
     </Grid>
 </Window>

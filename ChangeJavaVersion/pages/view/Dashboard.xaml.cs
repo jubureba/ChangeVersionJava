@@ -1,16 +1,12 @@
-﻿using ChangeJavaVersion.Modelos.Interfaces;
+﻿using ChangeJavaVersion.pages.abstracts;
 using ChangeJavaVersion.pages.view.config;
+using ChangeJavaVersion.Pages.utils;
 using ChangeJavaVersion.Properties;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,24 +16,12 @@ using System.Windows.Threading;
 namespace ChangeJavaVersion.pages {
 
     public partial class Dashboard : Page {
-        /*
-        private DispatcherTimer dispatcherTimer;
-        private FindPath fpath { get; set; }
-        private TextToObject txtObj { get; set; }
-        private SystemTrayTextToObject txtObjSTray { get; set; }
-        private String nameVariableJDK { get; set; }*/
-        private readonly DispatcherTimer _dispatcherTimer;
-        private readonly FindPath _fpath;
-        private readonly TextToObject _txtObj;
-        private readonly SystemTrayTextToObject _txtObjSTray;
+      
+        private DispatcherTimer _dispatcherTimer;
         private const string NameVariableJDK = "JAVA_HOME";
 
         public Dashboard() {
             InitializeComponent();
-
-            _fpath = new FindPathImpl();
-            _txtObj = new TextToObjectImpl();
-            _txtObjSTray = new SystemTrayTextToObjectImpl();
 
             var javaVersion = new List<JavaVersion>();
             var appSettings = ConfigurationManager.AppSettings;
@@ -48,21 +32,39 @@ namespace ChangeJavaVersion.pages {
 
             cbVersion.ItemsSource = javaVersion;
 
-            _dispatcherTimer = new DispatcherTimer();
-            _dispatcherTimer.Tick += DispatcherTimer_Tick;
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            startTimer(0, 0, 1);
         }
 
-        private void ComboBox_PreviewTextInput(object sender, TextCompositionEventArgs e) {
-            var comboBoxItems = System.Windows.Data.CollectionViewSource.GetDefaultView(cbVersion.ItemsSource);
+        public bool changeVersion(string versionPath) {
+            if (checkVersion("JAVA_HOME", EnvironmentVariableTarget.Machine).Equals(versionPath)) {
 
-            foreach (var item in comboBoxItems) {
-                var pathJava = item as PathJava;
+                ShowBalloon(messages.erro, String.Format(messages.versao_inalterada_completa, versionPath));
+                //MessageBox.Show(String.Format(messages.versao_inalterada_completa, versionPath), messages.erro, MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            } else {
+                //MessageBox.Show(String.Format(messages.versao_alterada_completa, checkVersion(NameVariableJDK, EnvironmentVariableTarget.Machine).ToString(), versionPath), messages.sucesso, MessageBoxButton.OK, MessageBoxImage.Information);
+                setVersionInEnvironmentVariable(NameVariableJDK, versionPath, EnvironmentVariableTarget.Machine);
+                ShowBalloon(messages.sucesso, String.Format(String.Format(messages.versao_alterada_completa, checkVersion(NameVariableJDK, EnvironmentVariableTarget.Machine).ToString(), versionPath)));
+                return true;
+            }
+            cleanVersion();
+        }
 
-                if (pathJava?.Text?.ToUpper()?.Contains(e.Text.ToUpper()) ?? false) {
-                    cbVersion.SelectedItem = pathJava;
+        private void ShowBalloon(string title, string text) {
+            foreach (Window window in Application.Current.Windows) {
+                if (window.GetType() == typeof(Principal)) {
+                    BalloonView balloonView = new BalloonView();
+                    balloonView.ShowBalloon(title, text, (window as Principal).TaskbarIcon);
                 }
             }
+        }
+
+        public void setVersionInEnvironmentVariable(string variableName, string path, EnvironmentVariableTarget target) {
+            System.Environment.SetEnvironmentVariable(variableName, path, target);
+        }
+
+        public string checkVersion(string variableSystem, EnvironmentVariableTarget target) {
+            return System.Environment.GetEnvironmentVariable(variableSystem, target);
         }
 
         private void BtnChange_Click(object sender, RoutedEventArgs e) {
@@ -75,6 +77,18 @@ namespace ChangeJavaVersion.pages {
             changeVersion(versionPath);
         }
 
+        private void ComboBox_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            var comboBoxItems = System.Windows.Data.CollectionViewSource.GetDefaultView(cbVersion.ItemsSource);
+
+            foreach (var item in comboBoxItems) {
+                var javaVersion = item as JavaVersion;
+
+                if (javaVersion?.PathJava?.ToUpper()?.Contains(e.Text.ToUpper()) ?? false) {
+                    cbVersion.SelectedItem = javaVersion;
+                }
+            }
+        }
+
         private void BtnConfig_Click(object sender, RoutedEventArgs e) {
             NavigationService.Content = new PathConfigList();
         }
@@ -84,50 +98,25 @@ namespace ChangeJavaVersion.pages {
             _dispatcherTimer.Start();
         }
 
-        private void DispatcherTimer_Tick(object sender, EventArgs e) {
+        private void dispatcherTimer_Tick(object sender, EventArgs e) {
             spinner.Visibility = Visibility.Hidden;
             _dispatcherTimer.Stop();
             MessageBox.Show(checkVersion(NameVariableJDK, EnvironmentVariableTarget.Machine), messages.sucesso, MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void startTimer(int hour, int min, int sec) {
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            _dispatcherTimer.Interval = new TimeSpan(hour, min, sec);
         }
 
         public void cleanVersion() {
             cbVersion.SelectedItem = null;
         }
 
-        public bool changeVersion(string versionPath) {
-
-            ProcessStartInfo processInfo = new ProcessStartInfo();
-            processInfo.Verb = "runas";
-            processInfo.FileName = Assembly.GetExecutingAssembly().CodeBase;
-            try {
-                Process.Start(processInfo);
-                Application.Current.Shutdown();
-            } catch (Exception ex) {
-                Console.WriteLine("Não foi possível iniciar a aplicação como administrador.");
-                Console.WriteLine(ex);
-            }
-
-            if (checkVersion("JAVA_HOME", EnvironmentVariableTarget.Machine).Equals(versionPath)) {
-                MessageBox.Show(String.Format(messages.versao_inalterada_completa, versionPath), messages.erro, MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            } else {
-                MessageBox.Show(String.Format(messages.versao_alterada_completa, checkVersion(NameVariableJDK, EnvironmentVariableTarget.Machine).ToString(), versionPath), messages.sucesso, MessageBoxButton.OK, MessageBoxImage.Information);
-                setVersionInEnvironmentVariable(NameVariableJDK, versionPath, EnvironmentVariableTarget.Machine);
-                return true;
-            }
-            cleanVersion();
-        }
-        public void setVersionInEnvironmentVariable(string variableName, string path, EnvironmentVariableTarget target) {
-            System.Environment.SetEnvironmentVariable(variableName, path, target);
-        }
-
-        public string checkVersion(string variableSystem, EnvironmentVariableTarget target) {
-            return System.Environment.GetEnvironmentVariable(variableSystem, target);
-        }
-
         private void btnCheckVersion_Click(object sender, RoutedEventArgs e) {
             spinner.Visibility = Visibility.Visible;
+            _dispatcherTimer.Start();
         }
-
     }
 }

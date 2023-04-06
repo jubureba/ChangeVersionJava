@@ -8,7 +8,7 @@
       xmlns:local="clr-namespace:ChangeJavaVersion.pages.view.Config"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="750"
-      Title="Configuracoes">
+      Title="Configuracoes" >
 
     <Page.Resources>
         <ResourceDictionary>
@@ -27,9 +27,6 @@
 
     <Grid x:Name="content" Height="500" Width="550" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="0 0 0 0" >
 
-
-
-
         <Rectangle Width="550" HorizontalAlignment="Center" Margin="0,20,0,200" Fill="White" RadiusX="10" RadiusY="10" Style="{StaticResource Estilo_Retangulo}"/>
         <Grid Height="280" Width="550" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 20 0 0">
             <Border BorderThickness="0 0 0 1"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="550" Height="70" BorderBrush="LightGray">
@@ -39,10 +36,10 @@
                 </Grid>
             </Border>
             <Grid Margin="0" Width="550" Height="140">
-                <view:SliderButton OnLabel="" OffLabel="" x:Name="sbTraySystem" Width="70" ButtonWidth="20" Style="{StaticResource styleSliderButtonSideLabel}"  Margin="20,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="sbTraySystem_Click" />
+                <view:SliderButton OnLabel="" OffLabel="" x:Name="btnRunBackground" Width="70" ButtonWidth="20" Style="{StaticResource styleSliderButtonSideLabel}"  Margin="20,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="btnRunBackground_Click" />
                 <TextBlock Text="MANTER EXECUTANDO EM SEGUNDO PLANO" Margin="110,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
 
-                <view:SliderButton OnLabel="" OffLabel="" x:Name="sbStartWindows" Width="70" ButtonWidth="20" Style="{StaticResource styleSliderButtonSideLabel}"  Margin="20,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="22" RenderTransformOrigin="0.5,0.5"  Click="sbStartWindows_Click"/>
+                <view:SliderButton OnLabel="" OffLabel="" x:Name="btnStartup" Width="70" ButtonWidth="20" Style="{StaticResource styleSliderButtonSideLabel}"  Margin="20,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="22" RenderTransformOrigin="0.5,0.5"  Click="btnStartup_Click"/>
                 <TextBlock Text="INICIAR JUNTO COM O WINDOWS" Margin="110 53 0 0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="LightGray" FontWeight="Bold"/>
 
                 <ComboBox Height="30" HorizontalAlignment="Left" Margin="30,80,0,0" x:Name="cbIdioma" FlowDirection="LeftToRight"

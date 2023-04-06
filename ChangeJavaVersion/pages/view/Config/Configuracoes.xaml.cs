@@ -1,6 +1,7 @@
 ﻿using ChangeJavaVersion.Modelos.Interfaces;
 using ChangeJavaVersion.pages.abstracts;
 using ChangeJavaVersion.pages.view.config;
+using ChangeJavaVersion.Pages.utils;
 using ChangeJavaVersion.Properties;
 using Microsoft.Win32;
 using System;
@@ -20,90 +21,77 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ChangeJavaVersion.pages.view.Config {
-    public partial class Configuracoes : Page {
+    public partial class Configuracoes : System.Windows.Controls.Page {
 
-        IAppConfig appConfig = new IAppConfigImpl();
-        FindPath fpath = new FindPathImpl();
-        SystemTrayTextToObject txtObjSTray = new SystemTrayTextToObjectImpl();
-
-        //Constructor
         public Configuracoes() {
             InitializeComponent();
-            PreencherSliderButton();
             PreencherComboBox();
+            Loaded += (sender, args) => {
+                PreencherSliderButton();
+            };
         }
 
-        /*
-         * ================================================================
-         * CONFIGURAÇOES ==================================================
-         * ================================================================
-         */
-
         private void PreencherComboBox() {
-            List<string> idiomas = new List<string> { "Português", "English" };
+            List<string> idiomas = new List<string> { "Português" };
             cbIdioma.ItemsSource = idiomas;
-            cbIdioma.SelectedItem = ConfigurationManager.AppSettings.Get("Language");         
+            cbIdioma.SelectedItem = ConfigurationManager.AppSettings.Get("Language");
         }
 
         private void PreencherSliderButton() {
-            bool systemTray = Boolean.Parse(ConfigurationManager.AppSettings.Get("TraySystem"));
-            bool startup = Boolean.Parse(ConfigurationManager.AppSettings.Get("Startup"));
-
-            sbTraySystem.IsChecked = systemTray;
-            sbStartWindows.IsChecked = startup;
+            Boolean runBackground, startup;
+            Boolean.TryParse(ConfigurationManager.AppSettings["config_runBackground"], out runBackground);
+            Boolean.TryParse(ConfigurationManager.AppSettings["config_startup"], out startup);
+            btnRunBackground.IsChecked = runBackground;
+            btnStartup.IsChecked = startup;
         }
 
-        private void RegisterInStartup(bool isChecked) {
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
-                    ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            if (isChecked) {
-                registryKey.SetValue(messages.sistema, Process.GetCurrentProcess().MainModule.FileName);
+        private void atualizarConfig() {
+            ConfigurationManager.AppSettings["config_runBackground"] = btnRunBackground.IsChecked.ToString();
+            ConfigurationManager.AppSettings["config_startup"] = btnStartup.IsChecked.ToString();
+        }
+
+        private void btnRunBackground_Click(object sender, RoutedEventArgs e) {
+            UpdateConfigSetting("config_runBackground", btnRunBackground.IsChecked == true);
+            atualizarConfig();
+        }
+
+        private void UpdateConfigSetting(string key, bool value) {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings[key].Value = value.ToString();
+            config.Save(ConfigurationSaveMode.Modified);
+        }
+
+        private void btnStartup_Click(object sender, RoutedEventArgs e) {
+            ManageStartup(btnStartup.IsChecked == true);
+            atualizarConfig();
+        }
+
+        private void ManageStartup(bool enable) {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["config_startup"].Value = enable.ToString();
+            config.Save(ConfigurationSaveMode.Modified);
+
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+
+            if (enable) {
+                string fileName = Process.GetCurrentProcess().MainModule.FileName.Replace(".dll", ".exe");
+                registryKey.SetValue(messages.sistema, fileName);
             } else {
-                registryKey.DeleteValue(messages.sistema);
-            }
-        }
-
-        /*
-         * ================================================================
-         * AÇOES ==========================================================
-         * ================================================================
-         */
-
-        private void sbTraySystem_Click(object sender, RoutedEventArgs e) {
-            if (sbTraySystem.IsChecked == true) {
-                appConfig.AddOrUpdateAppSettings("TraySystem", "True");
-            } else {             
-                appConfig.AddOrUpdateAppSettings("TraySystem", "False");
+                registryKey.DeleteValue(messages.sistema, false);
             }
         }
 
         private void btnVoltar_Click(object sender, RoutedEventArgs e) {
             while (NavigationService.RemoveBackEntry() != null) ;
             NavigationService.Content = new Dashboard();
-        }
-
-                private void sbStartWindows_Click(object sender, RoutedEventArgs e) {
-            if (sbStartWindows.IsChecked == true) {
-                RegisterInStartup(true);
-                appConfig.AddOrUpdateAppSettings("Startup", "True");
-            } else {
-                RegisterInStartup(false);
-                appConfig.AddOrUpdateAppSettings("Startup", "False");
-            }
+            atualizarConfig();
         }
 
         private void cbIdioma_PreviewTextInput(object sender, TextCompositionEventArgs e) {
-
+            e.Handled = true;
         }
-
-        /*
-        static void lineChanger(string newText, string fileName, int line_to_edit) {
-            string[] arrLine = File.ReadAllLines(fileName);
-            arrLine[line_to_edit - 1] = newText;
-            File.WriteAllLines(fileName, arrLine);
-        }*/
-
     }
 }

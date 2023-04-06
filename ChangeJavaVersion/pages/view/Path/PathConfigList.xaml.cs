@@ -1,28 +1,17 @@
-﻿using ChangeJavaVersion.Dominio.Modelos.Enums;
-using ChangeJavaVersion.Modelos.Interfaces;
-using ChangeJavaVersion.Modelos.Utils;
+﻿using ChangeJavaVersion.Modelos.Utils;
 using ChangeJavaVersion.pages.abstracts;
+using ChangeJavaVersion.Pages.utils;
+using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Xml.Linq;
 
 namespace ChangeJavaVersion.pages.view.config {
 
@@ -32,6 +21,9 @@ namespace ChangeJavaVersion.pages.view.config {
         int page = 1;
         const int qtdRegistrosPage = 6;
         int qtdRegistros = 0;
+
+        private const string prefixJavaVersion = "Java_";
+        private const string registerPathJdk = @"SOFTWARE\\JavaSoft\\Java Development Kit\";
 
         public PathConfigList() {
             InitializeComponent();
@@ -58,7 +50,7 @@ namespace ChangeJavaVersion.pages.view.config {
             var appSettings = ConfigurationManager.AppSettings;
             foreach (var key in appSettings.AllKeys)
             {
-                if (key.StartsWith("Java_"))
+                if (key.StartsWith(prefixJavaVersion))
                 {
                     javaVersion.Add(new JavaVersion { Version = key, PathJava = appSettings[key] });
                 }
@@ -80,6 +72,12 @@ namespace ChangeJavaVersion.pages.view.config {
             }
         }
 
+        private void atualizarTrayMenu() {
+            var taskbarIcon = ((Principal)Application.Current.MainWindow).TaskbarIcon;
+            Principal principal = new Principal();
+            principal.UpdateContextMenu(taskbarIcon);
+        }
+
         private void enableAllButtons () {
             btnPrevious.IsEnabled = true;
             btnNext.IsEnabled = true;
@@ -99,12 +97,11 @@ namespace ChangeJavaVersion.pages.view.config {
             NavigationService.Content = new PathConfigForm();
         }
 
-        private void btnAdicionarAutomaticamente_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnAdicionarAutomaticamente_Click(object sender, RoutedEventArgs e) {
             spinnerVisibility();
 
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            string keyPath = @"SOFTWARE\JavaSoft\Java Development Kit";
+            string keyPath = registerPathJdk;
             string[] versions = getInstalledJavaVersions(keyPath);
             var appSettings = (AppSettingsSection)config.GetSection("appSettings");
 
@@ -117,7 +114,7 @@ namespace ChangeJavaVersion.pages.view.config {
             //REMOVE TODOS OS REGISTROS QUE COMEÇEM COM JAVA_, ANTES DE ADICIONAR NOVAMENTE 
             foreach (string key in appConfig.AllKeys)
             {
-                if (key.StartsWith("Java_"))
+                if (key.StartsWith(prefixJavaVersion))
                     appSettings.Settings.Remove(key);
             }
 
@@ -127,19 +124,21 @@ namespace ChangeJavaVersion.pages.view.config {
                 localKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
                 localKey = localKey.OpenSubKey(keyPath + @"\" + version);
                 string javaHome = localKey.GetValue("JavaHome").ToString();
-                appSettings.Settings.Add("Java_" + version, javaHome);
+                appSettings.Settings.Add(prefixJavaVersion + version, javaHome);
             }
 
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
 
-            ShowBalloon("Sucesso!", "Novo Path cadastrado com sucesso.");
+            ShowBalloon("ChangeJavaVersion Sucess!", "Novo Path cadastrado com sucesso.");
 
             atualizarPaginador();
+            atualizarTrayMenu();
+            // taskbarIcon.ToolTipText = "Nova dica de ferramenta";
+            
         }
 
-        private string[] getInstalledJavaVersions(string keyPath)
-        {
+        private string[] getInstalledJavaVersions(string keyPath) {
             RegistryKey localKey;
             localKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
             localKey = localKey.OpenSubKey(keyPath);
@@ -166,6 +165,7 @@ namespace ChangeJavaVersion.pages.view.config {
             ShowBalloon("Sucesso!", tablePath.SelectedValue.ToString() + " Removido.");
 
             atualizarPaginador();
+            atualizarTrayMenu();
         }
 
         private void ShowBalloon(string title, string text)
@@ -175,7 +175,7 @@ namespace ChangeJavaVersion.pages.view.config {
                 if (window.GetType() == typeof(Principal))
                 {
                     BalloonView balloonView = new BalloonView();
-                    balloonView.ShowBalloon(title, text, (window as Principal).MyNotifyIcon);
+                    balloonView.ShowBalloon(title, text, (window as Principal).TaskbarIcon);
                 }
             }
         }
@@ -216,9 +216,3 @@ namespace ChangeJavaVersion.pages.view.config {
 }
 
 
-public class JavaVersion
-{
-    public string Version { get; set; }
-    public string PathJava { get; set; }
-
-}

@@ -21,9 +21,6 @@
     <Compile Update="Pages\view\Path\PathConfigList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\Window1.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\Principal.xaml">
@@ -78,9 +75,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\view\Dashboard.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\Window1.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

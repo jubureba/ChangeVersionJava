@@ -2,9 +2,6 @@
 using System.Windows.Input;
 
 namespace ChangeJavaVersion.pages.notify.commands {
-    /// <summary>
-    /// Shows the main window.
-    /// </summary>
     public class ShowSampleWindowCommand : CommandBase<ShowSampleWindowCommand>
     {
         public override void Execute(object parameter)
@@ -12,7 +9,6 @@ namespace ChangeJavaVersion.pages.notify.commands {
             GetTaskbarWindow(parameter).Visibility = Visibility.Visible;
             CommandManager.InvalidateRequerySuggested();
         }
-
 
         public override bool CanExecute(object parameter)
         {

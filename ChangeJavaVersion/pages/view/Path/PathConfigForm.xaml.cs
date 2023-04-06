@@ -32,7 +32,7 @@ namespace ChangeJavaVersion.pages.view.config {
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(Principal)) { 
                     BalloonView balloonView = new BalloonView();
-                    balloonView.ShowBalloon(title, text, (window as Principal).MyNotifyIcon);
+                    //balloonView.ShowBalloon(title, text, (window as Principal).MyNotifyIcon);
                 }
             }
         }
