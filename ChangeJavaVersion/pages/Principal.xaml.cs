@@ -54,7 +54,7 @@ namespace ChangeJavaVersion {
             createTaskBarIcon();
             UpdateContextMenu(taskbarIcon);
         }
-
+         
         private void createTaskBarIcon() {
             if (taskbarIcon != null) {
                 return;
