@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="build" xml:space="preserve">
     <value> - Build versão: </value>
@@ -123,11 +123,23 @@
   <data name="erro" xml:space="preserve">
     <value>Erro! </value>
   </data>
+  <data name="github.key" xml:space="preserve">
+    <value>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</value>
+  </data>
+  <data name="github.project" xml:space="preserve">
+    <value>ChangeVersionJava</value>
+  </data>
+  <data name="github.user" xml:space="preserve">
+    <value>jubureba</value>
+  </data>
   <data name="SessaoInvalidaMsg" xml:space="preserve">
     <value>Sua sessão não esta mais ativa.</value>
   </data>
   <data name="sistema" xml:space="preserve">
     <value>Change Java Version</value>
+  </data>
+  <data name="sistema.icone" xml:space="preserve">
+    <value>pack://application:,,,/ChangeJavaVersion;component/pages/javaIcon.ico</value>
   </data>
   <data name="sucesso" xml:space="preserve">
     <value>Sucesso! </value>

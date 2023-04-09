@@ -11,10 +11,8 @@
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <SignAssembly>False</SignAssembly>
     <FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
     <PackageReleaseNotes>correcoes de bugs</PackageReleaseNotes>
-	  <AssemblyVersion>$([System.Text.RegularExpressions.Regex]::Match($(ApplicationVersion), "(\d+)\.(\d+)\.(\d+)\.(\d+)").Value)</AssemblyVersion>
-	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -26,13 +24,7 @@
     <None Remove="Excecoes\**" />
     <Page Remove="clickonce\**" />
     <Page Remove="Excecoes\**" />
-	  <None Include="$(PublishDir)$(ApplicationName)_$(Configuration)_$(ApplicationVersion)\$(ApplicationName)_$(Configuration)_$(ApplicationVersion).application">
-		  <Link>$(ApplicationName).application</Link>
-		  <Visible>false</Visible>
-	  </None>
   </ItemGroup>
-	
-	
 
   <ItemGroup>
     <None Remove="app.manifest" />
@@ -89,11 +81,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -108,11 +95,19 @@
       <LastGenOutput>messages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
+	
+	
+	<PropertyGroup>
+		<ClickOnceVersion>$([System.IO.Path]::GetFullPath('$(ProjectDir)Properties\PublishProfiles\ClickOnceProfile.pubxml'))</ClickOnceVersion>
+		<TempFilePath>$(MSBuildProjectDirectory)\$(MSBuildProjectName).tmp</TempFilePath>
+		<ApplicationVersion>1.0.0.0</ApplicationVersion>
+	</PropertyGroup>
+	
+	
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="sad" />
+	</Target>
 
-
+	
 </Project>

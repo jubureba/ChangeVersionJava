@@ -14,7 +14,6 @@
     <PackageReleaseNotes>correcoes de bugs</PackageReleaseNotes>
 	  <AssemblyVersion>$([System.Text.RegularExpressions.Regex]::Match($(ApplicationVersion), "(\d+)\.(\d+)\.(\d+)\.(\d+)").Value)</AssemblyVersion>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -31,8 +30,6 @@
 		  <Visible>false</Visible>
 	  </None>
   </ItemGroup>
-	
-	
 
   <ItemGroup>
     <None Remove="app.manifest" />

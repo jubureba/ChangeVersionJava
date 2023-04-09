@@ -12,9 +12,7 @@
     <SignAssembly>False</SignAssembly>
     <FileVersion>1.0.0</FileVersion>
     <PackageReleaseNotes>correcoes de bugs</PackageReleaseNotes>
-	  <AssemblyVersion>$([System.Text.RegularExpressions.Regex]::Match($(ApplicationVersion), "(\d+)\.(\d+)\.(\d+)\.(\d+)").Value)</AssemblyVersion>
-	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <AssemblyVersion>CLICKONCE_VERSION=$(ApplicationVersion)</AssemblyVersion>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -31,8 +29,6 @@
 		  <Visible>false</Visible>
 	  </None>
   </ItemGroup>
-	
-	
 
   <ItemGroup>
     <None Remove="app.manifest" />
@@ -113,6 +109,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="set version=$([System.Text.RegularExpressions.Regex]::Match(1.0.0.*, &quot;(\d+)\.(\d+)\.(\d+)\.(\d+)&quot;).Value)&#xD;&#xA;" />
+  </Target>
 
 
 </Project>

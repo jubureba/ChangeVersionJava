@@ -79,6 +79,33 @@ namespace ChangeJavaVersion.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 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.
+        /// </summary>
+        public static string github_key {
+            get {
+                return ResourceManager.GetString("github.key", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a ChangeVersionJava.
+        /// </summary>
+        public static string github_project {
+            get {
+                return ResourceManager.GetString("github.project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a jubureba.
+        /// </summary>
+        public static string github_user {
+            get {
+                return ResourceManager.GetString("github.user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Sua sessão não esta mais ativa..
         /// </summary>
         public static string SessaoInvalidaMsg {
@@ -93,6 +120,15 @@ namespace ChangeJavaVersion.Properties {
         public static string sistema {
             get {
                 return ResourceManager.GetString("sistema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a pack://application:,,,/ChangeJavaVersion;component/pages/javaIcon.ico.
+        /// </summary>
+        public static string sistema_icone {
+            get {
+                return ResourceManager.GetString("sistema.icone", resourceCulture);
             }
         }
         

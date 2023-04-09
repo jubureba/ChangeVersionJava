@@ -7,6 +7,7 @@ using ChangeJavaVersion.pages.view.Donate;
 using ChangeJavaVersion.Pages.utils;
 using ChangeJavaVersion.Properties;
 using Hardcodet.Wpf.TaskbarNotification;
+using Octokit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,13 +54,48 @@ namespace ChangeJavaVersion {
             ConfigureJavaVersion();
             createTaskBarIcon();
             UpdateContextMenu(taskbarIcon);
+
+            loadGitHubInfo();
+
+            // Obtém a versão do assembly
+            Version version = Assembly.GetEntryAssembly().GetName().Version;
+
+            // Obtém a versão semântica do assembly
+            string semanticVersion = $"{version.Major}.{version.Minor}.{version.Build}";
+
+            //MessageBox.Show(version + "   " +  semanticVersion);
+
         }
+
+        private async void loadGitHubInfo() {
+            try {
+                var github = new GitHubClient(new ProductHeaderValue(messages.github_project));
+                var tokenAuth = new Credentials(messages.github_key);
+                github.Credentials = tokenAuth;
+
+                var commits = await github.Repository.Commit.GetAll(messages.github_user, messages.github_project);
+                var latestCommit = commits[0];
+                var lastCommitId = latestCommit.Sha;
+                var lastCommitDate = latestCommit.Commit.Author.Date;
+
+                // Atualizar as chaves do app.config com as informações do último commit
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings["LastCommitID"].Value = lastCommitId;
+                config.AppSettings.Settings["LastCommitDate"].Value = lastCommitDate.ToString();
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("appSettings");
+
+            } catch (Exception e) {
+                return;
+            }  
+        }
+
         private void createTaskBarIcon() {
             if (taskbarIcon != null) {
                 return;
             }
 
-            var uri = new Uri("pack://application:,,,/ChangeJavaVersion;component/pages/javaIcon.ico", UriKind.RelativeOrAbsolute);
+            var uri = new Uri(messages.sistema_icone, UriKind.RelativeOrAbsolute);
             var stream = Application.GetResourceStream(uri)?.Stream;
             var icon = new System.Drawing.Icon(stream);
             taskbarIcon = new Hardcodet.Wpf.TaskbarNotification.TaskbarIcon();
@@ -70,7 +106,7 @@ namespace ChangeJavaVersion {
 
         public void UpdateContextMenu(TaskbarIcon taskbarIcon) {
             var javaSettings = ConfigurationManager.AppSettings.AllKeys
-                .Where(key => key.StartsWith("Java_"))
+                .Where(key => key.StartsWith(JAVA_PREFIX))
                 .ToDictionary(key => key, key => ConfigurationManager.AppSettings[key]);
 
             var menuItems = new List<MenuItem>();
@@ -148,7 +184,7 @@ namespace ChangeJavaVersion {
         }
 
         private void MinimizeMenuItem_Click(object sender, RoutedEventArgs e) {
-            Hide();
+            this.Hide();
         }
 
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e) {
